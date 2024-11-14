@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date, Float, JSON, ForeignKey, TIMESTAMP
 from sqlalchemy.orm import relationship
-from database import Base
+from back.database1 import Base
 
 class Customer(Base):
     __tablename__ = "customers"

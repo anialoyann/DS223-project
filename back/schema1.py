@@ -46,7 +46,7 @@ class EngagementBase(BaseModel):
     customer_id: int
     session_duration: int
     session_date: date
-    actions: Dict  # JSON data represented as a dictionary
+    actions: dict
     device_type: str
 
 class EngagementCreate(EngagementBase):
@@ -64,7 +64,7 @@ class Engagement(EngagementBase):
 class SegmentBase(BaseModel):
     name: str
     description: Optional[str] = None
-    criteria: Dict  # JSON data represented as a dictionary
+    criteria: dict  # JSON data represented as a dictionary
 
 class SegmentCreate(SegmentBase):
     pass
