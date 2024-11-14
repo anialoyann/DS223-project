@@ -1,0 +1,5 @@
+ab_test_id,test_variant,test_goal
+1,1,Streaming
+2,2,Streaming
+3,1,Subscription
+4,2,Subscription
