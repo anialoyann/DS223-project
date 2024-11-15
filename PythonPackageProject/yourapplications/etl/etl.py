@@ -121,3 +121,4 @@ for table in base_names:
         print(f"Failed to ingest table {table}. Moving to the next!")
 
 print("Tables are populated.")
+
