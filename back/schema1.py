@@ -1,13 +1,26 @@
 from pydantic import BaseModel
 from typing import Optional, List
-from datetime import date, datetime
+from datetime import datetime
+
+# Segment Schemas
+class SegmentBase(BaseModel):
+    segment_name: str
+    segment_description: Optional[str]
+
+class SegmentCreate(SegmentBase):
+    pass
+
+class Segment(SegmentBase):
+    segment_id: int
+    class Config:
+        orm_mode = True
 
 # Customer Schemas
 class CustomerBase(BaseModel):
     name: str
     email: str
-    subscription_type: str
-    location: str
+    subscription_id: Optional[int]
+    location: Optional[str]
 
 class CustomerCreate(CustomerBase):
     pass
@@ -22,62 +35,7 @@ class Customer(CustomerBase):
     class Config:
         orm_mode = True
 
-# Engagement Schemas
-class EngagementBase(BaseModel):
-    customer_id: int
-    session_duration: int
-    session_date: date
-    actions: dict
-    device_type: str
-
-class EngagementCreate(EngagementBase):
-    pass
-
-class EngagementUpdate(EngagementBase):
-    pass
-
-class Engagement(EngagementBase):
-    engagement_id: int
-    class Config:
-        orm_mode = True
-
-# Engagement Schemas
-class EngagementBase(BaseModel):
-    customer_id: int
-    session_duration: int
-    session_date: date
-    actions: dict
-    device_type: str
-
-class EngagementCreate(EngagementBase):
-    pass
-
-class EngagementUpdate(EngagementBase):
-    pass
-
-class Engagement(EngagementBase):
-    engagement_id: int
-    class Config:
-        orm_mode = True
-
-# Segment Schemas
-class SegmentBase(BaseModel):
-    name: str
-    description: Optional[str] = None
-    criteria: dict  # JSON data represented as a dictionary
-
-class SegmentCreate(SegmentBase):
-    pass
-
-class SegmentUpdate(SegmentBase):
-    pass
-
-class Segment(SegmentBase):
-    segment_id: int
-    class Config:
-        orm_mode = True
-
-# CustomerSegment Schemas
+# Customer Segment Schemas
 class CustomerSegmentBase(BaseModel):
     customer_id: int
     segment_id: int
@@ -85,26 +43,64 @@ class CustomerSegmentBase(BaseModel):
 class CustomerSegmentCreate(CustomerSegmentBase):
     pass
 
-class CustomerSegmentUpdate(CustomerSegmentBase):
-    pass
-
 class CustomerSegment(CustomerSegmentBase):
     customer_segment_id: int
     class Config:
         orm_mode = True
 
-# ABTest Schemas
-class ABTestBase(BaseModel):
-    segment_id: int
-    test_variant: str
-    start_date: date
-    end_date: date
-    result_metric: str
+# Movie Schemas
+class MovieBase(BaseModel):
+    movie_name: str
+    movie_rating: Optional[float]
+    movie_duration: Optional[int]
+    movie_genre: Optional[str]
+    release_year: Optional[int]
 
-class ABTestCreate(ABTestBase):
+class MovieCreate(MovieBase):
     pass
 
-class ABTestUpdate(ABTestBase):
+class Movie(MovieBase):
+    movie_id: int
+    class Config:
+        orm_mode = True
+
+# Engagement Schemas
+class EngagementBase(BaseModel):
+    customer_id: int
+    movie_id: int
+    has_watched_fully: Optional[bool]
+    like_status: Optional[str]
+    date_watched: Optional[datetime]
+
+class EngagementCreate(EngagementBase):
+    pass
+
+class Engagement(EngagementBase):
+    customer_movie_id: int
+    class Config:
+        orm_mode = True
+
+# Subscription Schemas
+class SubscriptionBase(BaseModel):
+    subscription_name: str
+    price: int
+
+class SubscriptionCreate(SubscriptionBase):
+    pass
+
+class Subscription(SubscriptionBase):
+    subscription_id: int
+    class Config:
+        orm_mode = True
+
+# AB Test Schemas
+class ABTestBase(BaseModel):
+    goal: str
+    targeting: str
+    test_variant: Optional[int]
+    text_skeleton: Optional[str]
+
+class ABTestCreate(ABTestBase):
     pass
 
 class ABTest(ABTestBase):
@@ -112,20 +108,17 @@ class ABTest(ABTestBase):
     class Config:
         orm_mode = True
 
-# TestResult Schemas
-class TestResultBase(BaseModel):
+# AB Test Result Schemas
+class ABTestResultBase(BaseModel):
     ab_test_id: int
     customer_id: int
-    engagement_change: float
-    retention_change: float
+    clicked_link: Optional[bool]
+    time_spent_seconds: Optional[int]
 
-class TestResultCreate(TestResultBase):
+class ABTestResultCreate(ABTestResultBase):
     pass
 
-class TestResultUpdate(TestResultBase):
-    pass
-
-class TestResult(TestResultBase):
-    test_result_id: int
+class ABTestResult(ABTestResultBase):
+    result_id: int
     class Config:
         orm_mode = True
