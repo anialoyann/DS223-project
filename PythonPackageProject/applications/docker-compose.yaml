@@ -45,3 +45,15 @@ services:
         condition: service_healthy
     healthcheck:
       test: "exit 0"
+
+
+  app:
+    build: .
+    container_name: fastapi_app
+    environment:
+      DATABASE_URL: postgresql://user:password@db/dbname
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: uvicorn back.main:app --host 0.0.0.0 --port 8000  # or adjust path to `app.main:app` if needed
