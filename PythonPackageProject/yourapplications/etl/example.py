@@ -1,3 +1,5 @@
+# Successfully tested by data scientist
+
 from sqlalchemy import MetaData, Table
 from db_utils import insert_row, export_to_dataframe
 from dotenv import load_dotenv
@@ -21,12 +23,12 @@ movies_table = metadata.tables.get("movies")
 
 # Data to insert - FILL THIS IN BEFORE RUNNING AND MAKE SURE YOU'RE RUNNING FROM INSIDE THE CONTAINER ETL
 movie_data = {
-    "movie_name": "",
-    "release_year": ,
-    "movie_duration": ,
-    "movie_rating": ,
-    "movie_genre": ""
-}
+    "movie_name": "Hunger Games : The Ballad of Songbirds and Snakes",
+    "release_year": 2023 ,
+    "movie_duration": 157,
+    "movie_rating": 10000000000000000000000000000 ,
+    "movie_genre": "dystopian"
+    }
 
 def main():
     # Insert a new movie
