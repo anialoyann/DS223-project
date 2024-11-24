@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, Float, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from back.database1 import Base
+from database1 import Base
 
 # Segments Model
 class Segment(Base):
@@ -8,6 +8,7 @@ class Segment(Base):
     segment_id = Column(Integer, primary_key=True, index=True)
     segment_name = Column(String, nullable=False)
     segment_description = Column(Text)
+    customers = relationship("CustomerSegment", back_populates="segment")
 
 # Customers Model
 class Customer(Base):
@@ -20,7 +21,8 @@ class Customer(Base):
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
     segments = relationship("CustomerSegment", back_populates="customer")
-
+    engagements = relationship("Engagement", back_populates="customer")
+    
 # Customer Segments Model
 class CustomerSegment(Base):
     __tablename__ = "customer_segments"
@@ -49,6 +51,8 @@ class Engagement(Base):
     has_watched_fully = Column(Boolean)
     like_status = Column(String)
     date_watched = Column(DateTime)
+    customer = relationship("Customer", back_populates="engagements")
+    movie = relationship("Movie")
 
 # Subscriptions Model
 class Subscription(Base):
@@ -61,10 +65,11 @@ class Subscription(Base):
 class ABTest(Base):
     __tablename__ = "ab_tests"
     ab_test_id = Column(Integer, primary_key=True, index=True)
-    goal = Column(String, nullable=False)
-    targeting = Column(String, nullable=False)
-    test_variant = Column(Integer)
-    text_skeleton = Column(Text)
+    goal = Column(String, nullable=False)  # 'Engagement' or 'Subscription'
+    targeting = Column(String, nullable=False)  # 'genre', 'movie', or 'package'
+    test_variant = Column(Integer)  # A/B Test variant identifier
+    text_skeleton = Column(Text)  # Text template used in the A/B Test
+    results = relationship("ABTestResult", back_populates="ab_test")
 
 # AB Test Results Model
 class ABTestResult(Base):
@@ -74,3 +79,5 @@ class ABTestResult(Base):
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
     clicked_link = Column(Boolean)
     time_spent_seconds = Column(Integer)
+    ab_test = relationship("ABTest", back_populates="results")
+    customer = relationship("Customer")
