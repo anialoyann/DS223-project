@@ -1,12 +1,25 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from back.database1 import*
-import back.models1 as models1, back.schema1 as schemas
+from database1 import engine, SessionLocal
+import models1 as models1,schema1 as schemas
+from email_utils import send_email 
 
 # Creating database tables
 models1.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+@app.get("/test-send-email")
+async def test_send_email():
+    # Hardcode a test email and content for testing
+    recipient_email = ["ani_aloyan@edu.aua.am"]  # Use your test email here
+    subject = "Test Email"
+    body = "This is a test email sent from FastAPI without using the database."
+
+    # Send the email
+    send_email(recipient_email, subject, body)
+    
+    return {"message": "Test email sent successfully!"}
 
 # Dependency to get DB session
 def get_db():
@@ -16,6 +29,7 @@ def get_db():
     finally:
         db.close()
 
+# Base Root
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the FastAPI application!"}
@@ -123,3 +137,105 @@ def create_ab_test_result(ab_test_result: schemas.ABTestResultCreate, db: Sessio
 @app.get("/ab_test_results/", response_model=list[schemas.ABTestResult])
 def read_ab_test_results(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return db.query(models1.ABTestResult).offset(skip).limit(limit).all()
+
+# Endpoint for running an A/B test for a subscription goal
+@app.post("/run_ab_test_subscription/")
+async def run_ab_test_subscription(
+    segment_id: int, package_type: str, text_a: str, text_b: str, db: Session = Depends(get_db)
+):
+    # Fetch the segment
+    segment = db.query(models1.Segment).filter(models1.Segment.segment_id == segment_id).first()
+    if not segment:
+        raise HTTPException(status_code=404, detail="Segment not found")
+
+    # Create a new A/B test for subscription goal
+    ab_test = models1.ABTest(
+        goal="Subscription",
+        targeting=f"Package Type: {package_type}",
+        test_variant=1,  # Variant identifier
+        text_skeleton=f"Variant A: {text_a}, Variant B: {text_b}",
+    )
+    db.add(ab_test)
+    db.commit()
+    db.refresh(ab_test)
+
+    # Save the texts for A/B testing
+    text_a_entry = models1.Text(content=text_a)
+    text_b_entry = models1.Text(content=text_b)
+    db.add(text_a_entry)
+    db.add(text_b_entry)
+    db.commit()
+
+    # Link the saved texts to the A/B test
+    ab_test.test_variant = 1  # A/B test variant identifier for tracking
+    db.commit()
+
+    # Retrieve the customer emails for the segment
+    customers_in_segment = db.query(models1.Customer).join(models1.CustomerSegment).filter(
+        models1.CustomerSegment.segment_id == segment_id).all()
+
+    # Collect all customer emails
+    recipient_emails = [customer.email for customer in customers_in_segment]
+    
+    if not recipient_emails:
+        raise HTTPException(status_code=404, detail="No valid email addresses found")
+
+    # Send the email with the appropriate subject and body
+    send_email(
+        recipient_email=recipient_emails,
+        subject="Your A/B Test: Subscription Variant A/B",
+        body=f"Variant A: {text_a}\nVariant B: {text_b}"
+    )
+
+    return {"message": "Subscription A/B test created and emails sent to segment", "ab_test_id": ab_test.ab_test_id}
+
+# Endpoint for running an A/B test for engagement (genre or movie)
+@app.post("/run_ab_test_engagement/")
+async def run_ab_test_engagement(
+    segment_id: int, target_type: str, target_value: str, text_a: str, text_b: str, db: Session = Depends(get_db)
+):
+    # Fetch the segment
+    segment = db.query(models1.Segment).filter(models1.Segment.segment_id == segment_id).first()
+    if not segment:
+        raise HTTPException(status_code=404, detail="Segment not found")
+
+    # Create A/B test for engagement goal
+    ab_test = models1.ABTest(
+        goal="Engagement",
+        targeting=f"{target_type}: {target_value}",
+        test_variant=2,  # Variant identifier
+        text_skeleton=f"Variant A: {text_a}, Variant B: {text_b}",
+    )
+    db.add(ab_test)
+    db.commit()
+    db.refresh(ab_test)
+
+    # Save texts for A/B testing
+    text_a_entry = models1.Text(content=text_a)
+    text_b_entry = models1.Text(content=text_b)
+    db.add(text_a_entry)
+    db.add(text_b_entry)
+    db.commit()
+
+    # Link the saved texts to the A/B test
+    ab_test.test_variant = 2  # Variant identifier for tracking
+    db.commit()
+
+    # Retrieve the customer emails for the segment
+    customers_in_segment = db.query(models1.Customer).join(models1.CustomerSegment).filter(
+        models1.CustomerSegment.segment_id == segment_id).all()
+
+    # Collect all customer emails
+    recipient_emails = [customer.email for customer in customers_in_segment]
+
+    if not recipient_emails:
+        raise HTTPException(status_code=404, detail="No valid email addresses found")
+
+    # Send the email with the appropriate subject and body
+    send_email(
+        recipient_email=recipient_emails,
+        subject="Your A/B Test: Engagement Variant A/B",
+        body=f"Variant A: {text_a}\nVariant B: {text_b}"
+    )
+
+    return {"message": "Engagement A/B test created and emails sent to segment", "ab_test_id": ab_test.ab_test_id}

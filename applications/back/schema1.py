@@ -2,41 +2,38 @@ from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
 
-# Segment Schemas
-class SegmentBase(BaseModel):
+# Base Schema for common fields
+class BaseSchema(BaseModel):
+    class Config:
+        orm_mode = True  # To convert SQLAlchemy models to Pydantic models
+
+# Segment Schema
+class SegmentBase(BaseSchema):
     segment_name: str
-    segment_description: Optional[str]
+    segment_description: Optional[str] = None
 
 class SegmentCreate(SegmentBase):
     pass
 
 class Segment(SegmentBase):
     segment_id: int
-    class Config:
-        orm_mode = True
 
-# Customer Schemas
-class CustomerBase(BaseModel):
+# Customer Schema
+class CustomerBase(BaseSchema):
     name: str
     email: str
-    subscription_id: Optional[int]
-    location: Optional[str]
+    location: Optional[str] = None
 
 class CustomerCreate(CustomerBase):
-    pass
-
-class CustomerUpdate(CustomerBase):
-    pass
+    subscription_id: int
 
 class Customer(CustomerBase):
     customer_id: int
-    created_at: datetime
-    updated_at: datetime
-    class Config:
-        orm_mode = True
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
 
-# Customer Segment Schemas
-class CustomerSegmentBase(BaseModel):
+# Customer Segment Schema
+class CustomerSegmentBase(BaseSchema):
     customer_id: int
     segment_id: int
 
@@ -45,43 +42,37 @@ class CustomerSegmentCreate(CustomerSegmentBase):
 
 class CustomerSegment(CustomerSegmentBase):
     customer_segment_id: int
-    class Config:
-        orm_mode = True
 
-# Movie Schemas
-class MovieBase(BaseModel):
+# Movie Schema
+class MovieBase(BaseSchema):
     movie_name: str
-    movie_rating: Optional[float]
-    movie_duration: Optional[int]
-    movie_genre: Optional[str]
-    release_year: Optional[int]
+    movie_rating: Optional[float] = None
+    movie_duration: Optional[int] = None
+    movie_genre: Optional[str] = None
+    release_year: Optional[int] = None
 
 class MovieCreate(MovieBase):
     pass
 
 class Movie(MovieBase):
     movie_id: int
-    class Config:
-        orm_mode = True
 
-# Engagement Schemas
-class EngagementBase(BaseModel):
+# Engagement Schema
+class EngagementBase(BaseSchema):
     customer_id: int
     movie_id: int
-    has_watched_fully: Optional[bool]
-    like_status: Optional[str]
-    date_watched: Optional[datetime]
+    has_watched_fully: bool
+    like_status: Optional[str] = None
+    date_watched: Optional[str] = None
 
 class EngagementCreate(EngagementBase):
     pass
 
 class Engagement(EngagementBase):
     customer_movie_id: int
-    class Config:
-        orm_mode = True
 
-# Subscription Schemas
-class SubscriptionBase(BaseModel):
+# Subscription Schema
+class SubscriptionBase(BaseSchema):
     subscription_name: str
     price: int
 
@@ -90,35 +81,29 @@ class SubscriptionCreate(SubscriptionBase):
 
 class Subscription(SubscriptionBase):
     subscription_id: int
-    class Config:
-        orm_mode = True
 
-# AB Test Schemas
-class ABTestBase(BaseModel):
+# AB Test Schema
+class ABTestBase(BaseSchema):
     goal: str
     targeting: str
-    test_variant: Optional[int]
-    text_skeleton: Optional[str]
+    test_variant: int
+    text_skeleton: str
 
 class ABTestCreate(ABTestBase):
     pass
 
 class ABTest(ABTestBase):
     ab_test_id: int
-    class Config:
-        orm_mode = True
 
-# AB Test Result Schemas
-class ABTestResultBase(BaseModel):
+# AB Test Result Schema
+class ABTestResultBase(BaseSchema):
     ab_test_id: int
     customer_id: int
-    clicked_link: Optional[bool]
-    time_spent_seconds: Optional[int]
+    clicked_link: bool
+    time_spent_seconds: int
 
 class ABTestResultCreate(ABTestResultBase):
     pass
 
 class ABTestResult(ABTestResultBase):
     result_id: int
-    class Config:
-        orm_mode = True
