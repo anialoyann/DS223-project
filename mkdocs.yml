@@ -7,7 +7,7 @@ nav:
   - ETL: etl.md
   - API: api.md
   - APP: app.md
-  - API models: api_models.md
+ # - API models: api_models.md
 
 theme:
   name: material
