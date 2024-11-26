@@ -62,7 +62,9 @@ class Engagement(Base):
     engagement_id = Column(Integer, primary_key=True)
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
     movie_id =  Column(Integer, ForeignKey("movies.movie_id"))
+    session_duration = Column(Integer)
     session_date = Column(DateTime)
+    device_type = Column(String)
     watched_fully = Column(Boolean)
     like_status = Column(String)
 
@@ -78,24 +80,17 @@ class ABTest(Base):
     test_variant = Column(Integer)
     text_skeleton = Column(Text)
 
-class Experiment(Base):
-    __tablename__ = "experiments"
-    
-    experiment_id = Column(Integer, primary_key=True)
-    p_value = Column(Float)
-
 class ABTest_Result(Base):
     __tablename__ = "ab_test_results"
 
     result_id = Column(Integer, primary_key=True)
     ab_test_id = Column(Integer, ForeignKey("ab_tests.ab_test_id"))
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
-    experiment_id = Column(Integer, ForeignKey("experiments.experiment_id"))
     clicked_link = Column(Boolean)
+    time_spent_seconds = Column(Integer)
 
     customer = relationship("Customer")
     abtest = relationship("ABTest")
-    experiment = relationship('Experiment')
-    
+
 Base.metadata.create_all(engine)
 
