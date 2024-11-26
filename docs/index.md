@@ -15,3 +15,10 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+## Services
+
+* `Database` - Postgres database.
+* `API` - Fast Api that connects with the postgres.
+* `App` - Streamlit which connects with Fast API.
+* `Pgadmain` - It is a UI that shows you the data you inserted.
+* `Docs` - Mkdocs it documents your codes.
