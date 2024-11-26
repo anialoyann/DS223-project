@@ -23,7 +23,7 @@ random.seed(10)
 
 NUMBER_OF_CUSTOMERS = 2000
 NUMBER_OF_ENGAGEMENTS = 10000
-NUMBER_OF_AB_TESTS = 4
+NUMBER_OF_AB_TESTS = 6
 NUMBER_OF_SUBSCRIPTIONS = 4
 NUMBER_OF_MOVIES = 10
 NUMBER_OF_SEGMENTS = 4
@@ -89,6 +89,20 @@ logger.info('Customer Segment Data (Empty)')
 logger.info(customer_segments)
 customer_segments.to_csv('data/customer_segments.csv', index=False)
 logger.info('Customer Segment Data saved to CSV.')
+
+# Empty Table for AB Test Results
+ab_test_results = pd.DataFrame(columns=["result_id", "ab_test_id", "customer_id", "experiment_id", "clicked_link"])
+logger.info('AB Test Results Data (Empty)')
+logger.info(ab_test_results)
+ab_test_results.to_csv('data/ab_test_results.csv', index=False)
+logger.info('AB Test Results Data saved to CSV.')
+
+# Empty Table for Experiments
+experiments = pd.DataFrame(columns=["experiment_id", "p_value"])
+logger.info('Experiments Data (Empty)')
+logger.info(experiments)
+experiments.to_csv('data/experiments.csv', index=False)
+logger.info('Experiments Data saved to CSV.')
 
 # Function to load CSV data into tables
 def load_csv_to_table(table_name, csv_path):
