@@ -2,41 +2,47 @@ site_name: Documentation for the A/B tetsing Project
 site_description: a comprehensive documentation of how the code should be utilized.
 site_author: Your Name
 
-theme:
-  name: material
-  palette:
-    primary: indigo
-    accent: pink
-  font:
-    text: Roboto
-    code: Roboto Mono
-  favicon: images/favicon.ico
-
 nav:
   - Home: index.md
-  - Getting Started: getting_started.md
-  - API Reference:
-      - Products: api/products.md
-      - Subscriptions: api/subscriptions.md
-      - Customers: api/customers.md
-      - Engagements: api/engagements.md
-      - A/B Tests: api/ab_tests.md
-  - About: about.md
+  - ETL: etl.md
+  - API: api.md
+  - APP: app.md
+  - API models: api_models.md
 
-markdown_extensions:
-  - admonition
-  - codehilite
-  - footnotes
-  - toc:
-      permalink: true
-
-extra_css:
-  - css/custom.css
-
-extra_javascript:
-  - js/custom.js
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: teal
+      accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: teal
+      accent: lime
 
 plugins:
-  - search
-  - awesome-pages
-  #- mkdocs-material
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys
+            - sys.path.append(".")
+
+          rendering:
+            show_source: true
