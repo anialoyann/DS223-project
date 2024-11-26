@@ -80,9 +80,7 @@ def generate_engagement(engagement_id, customer_id, movie_id):
         "engagement_id": engagement_id,
         "customer_id": customer_id,
         "movie_id": movie_id,
-        "session_duration": random.randint(1, 360),
         "session_date": fake.date_this_year(),
-        "device_type": fake.random_element(elements=["Mobile", "Desktop", "Tablet"]),
         "watched_fully": fake.boolean(chance_of_getting_true=60),
         "like_status": fake.random_element(elements=["Liked", "Disliked", "No Action"]),
     }
@@ -93,31 +91,44 @@ def generate_ab_test(ab_test_id):
         {
             "ab_test_id": 1,
             "goal": "subscription",
-            "targeting": "by genre",
+            "targeting": "subscription_plan",
             "test_variant": 1,
-            "text_skeleton": "Unlock exclusive access to top-rated (insert_genre) movies! Subscribe now for just (insert_price) ."
+            "text_skeleton": "Simple. Affordable. Amazing. The (insert your subscription plan here) plan is yours today for just (insert your price here). What are you waiting for?" 
         },
         {
             "ab_test_id": 2,
             "goal": "subscription",
-            "targeting": "subscription sale",
+            "targeting": "subscription_plan",
             "test_variant": 2,
-            "text_skeleton": "Special deal for (insert_subscription_name) subscribers: Only (insert price) for a limited time!"
+            "text_skeleton": "You deserve the best, and the (insert your subscription plan here) plan gives you just that—for only (insert your price here). Start your premium experience today!"
         },
         {
             "ab_test_id": 3,
             "goal": "engagement",
             "targeting": "by movie",
             "test_variant": 1,
-            "text_skeleton": "Have you seen (insert_movies)? Don't missout! Watch now and enjoy the experience."
+            "text_skeleton": "Looking for your next favorite movie? (insert the movie here) is a must-watch. Start streaming today!"
         },
         {
             "ab_test_id": 4,
             "goal": "engagement",
+            "targeting": "by movie",
+            "test_variant": 2,
+            "text_skeleton": "Make tonight special with (insert the movie here). The perfect pick for your next binge session!"
+        },
+        {
+            "ab_test_id": 5,
+            "goal": "engagement",
+            "targeting": "by genre",
+            "test_variant": 1,
+            "text_skeleton": "Can’t get enough of (insert your genre)? We’ve got you covered! Start streaming the best titles now."
+        },{
+            "ab_test_id": 6,
+            "goal": "engagement",
             "targeting": "by genre",
             "test_variant": 2,
-            "text_skeleton": "Experience the magic of (insert_genre) likenever before. Click here and start watching!"
-        }
+            "text_skeleton": "Join millions of fans enjoying the best of (insert your genre). Don’t wait—start streaming now!"
+        },
     ]
 
     if 1 <= ab_test_id <= len(predefined_types):
