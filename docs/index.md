@@ -1,21 +1,11 @@
-# Welcome to MkDocs
+# 🌟 Welcome to our A/B Testing Group Project Documentation  
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This site provides comprehensive documentation for setting up, running, and maintaining our A/B Testing project. Whether you're a developer, data scientist, or stakeholder, you'll find everything you need to understand and utilize the system effectively.
 
-## Commands
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## 📂 Project Structure  
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-## Services
+Here’s a quick look at the project’s organization:  
 
 * `Database` - Postgres database.
 * `API` - Fast Api that connects with the postgres.
