@@ -8,7 +8,7 @@ from datetime import datetime
 from database import Base, engine
 
 Base= declarative_base()
-
+#ADDING THIS JUST TO COMMIT PLEASE
 class Subscription(Base):
     __tablename__ = "subscriptions"
 
