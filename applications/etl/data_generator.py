@@ -81,6 +81,7 @@ def generate_engagement(engagement_id, customer_id, movie_id):
         "customer_id": customer_id,
         "movie_id": movie_id,
         "session_date": fake.date_this_year(),
+        "session_duration": random.randint(1, 360),
         "watched_fully": fake.boolean(chance_of_getting_true=60),
         "like_status": fake.random_element(elements=["Liked", "Disliked", "No Action"]),
     }
