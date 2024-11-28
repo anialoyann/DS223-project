@@ -63,6 +63,7 @@ class Engagement(Base):
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
     movie_id =  Column(Integer, ForeignKey("movies.movie_id"))
     session_date = Column(DateTime)
+    session_duration = Column(Integer)
     watched_fully = Column(Boolean)
     like_status = Column(String)
 
