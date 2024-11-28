@@ -22,7 +22,8 @@ class Customer(Base):
     updated_at = Column(DateTime)
     segments = relationship("CustomerSegment", back_populates="customer")
     engagements = relationship("Engagement", back_populates="customer")
-    
+    ab_test_results = relationship("ABTestResult", back_populates="customer")
+
 # Customer Segments Model
 class CustomerSegment(Base):
     __tablename__ = "customer_segments"
@@ -76,8 +77,17 @@ class ABTestResult(Base):
     __tablename__ = "ab_test_results"
     result_id = Column(Integer, primary_key=True, index=True)
     ab_test_id = Column(Integer, ForeignKey("ab_tests.ab_test_id"))
+    experiment_id = Column(Integer, ForeignKey("experiments.experiment_id"))
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
     clicked_link = Column(Boolean)
     time_spent_seconds = Column(Integer)
     ab_test = relationship("ABTest", back_populates="results")
-    customer = relationship("Customer")
+    customer = relationship("Customer", back_populates="ab_test_results")
+    experiment = relationship("Experiment", back_populates="ab_test_results")
+
+# Experiments Model (New Table)
+class Experiment(Base):
+    __tablename__ = "experiments"
+    experiment_id = Column(Integer, primary_key=True, index=True)
+    p_value = Column(Float)
+    ab_test_results = relationship("ABTestResult", back_populates="experiment")
