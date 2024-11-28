@@ -98,6 +98,7 @@ class ABTest(ABTestBase):
 # AB Test Result Schema
 class ABTestResultBase(BaseSchema):
     ab_test_id: int
+    experiment_id: int  # Updated to include experiment_id
     customer_id: int
     clicked_link: bool
     time_spent_seconds: int
@@ -107,3 +108,13 @@ class ABTestResultCreate(ABTestResultBase):
 
 class ABTestResult(ABTestResultBase):
     result_id: int
+
+# Experiment Schema (New Model)
+class ExperimentBase(BaseSchema):
+    p_value: float
+
+class ExperimentCreate(ExperimentBase):
+    pass
+
+class Experiment(ExperimentBase):
+    experiment_id: int
