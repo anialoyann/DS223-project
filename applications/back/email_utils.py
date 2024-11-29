@@ -5,7 +5,7 @@ from typing import List, Optional
 from email.mime.application import MIMEApplication
 import uuid
 from sqlalchemy.orm import Session
-import models1  # Assuming models contains your SQLAlchemy classes
+import models1  
 
 
 # Gmail SMTP configuration
@@ -15,17 +15,46 @@ SENDER_EMAIL = "satmatharmenia@gmail.com"  # Your Gmail address
 SENDER_PASSWORD = "rwmg kzsj nkwu xfzg"  # Your Gmail App Password (not regular password)
 
 def generate_click_token():
-    """Generate a unique token for click tracking."""
+    """
+    Generate a unique token for click tracking.
+
+    **Returns:**
+    - `click_token (str)`: A randomly generated UUID token for tracking clicks.
+    """
     return str(uuid.uuid4())  # Generates a random unique UUID
 
 
 def get_ab_test_text_skeleton(db: Session, ab_test_id: int):
-    """Fetch the text skeleton for a given A/B test."""
+    """
+    Fetch the text skeleton for a given A/B test from the database.
+
+    **Parameters:**
+    - `db (Session)`: Database session object.
+    - `ab_test_id (int)`: The ID of the A/B test.
+
+    **Returns:**
+    - `text_skeleton (str)`: The email body template for the specified A/B test.
+
+    **Raises:**
+    - `AttributeError`: If the A/B test ID does not exist.
+    """
     return db.query(models1.AbTest).filter(models1.AbTest.ab_test_id == ab_test_id).first().text_skeleton
 
 
 def store_click_token(db: Session, ab_test_id: int, experiment_id: int, customer_id: int, click_token: str):
-    """Store the click token in the database for tracking."""
+    """
+    Store the click token in the database for tracking purposes.
+
+    **Parameters:**
+    - `db (Session)`: Database session object.
+    - `ab_test_id (int)`: The ID of the A/B test.
+    - `experiment_id (int)`: The ID of the experiment.
+    - `customer_id (int)`: The ID of the customer.
+    - `click_token (str)`: The unique token for tracking clicks.
+
+    **Behavior:**
+    - Updates an existing record or creates a new one if none exists.
+    """
     click_record = db.query(models1.AbTestResults).filter(
         models1.AbTestResults.ab_test_id == ab_test_id,
         models1.AbTestResults.experiment_id == experiment_id,
@@ -58,8 +87,26 @@ def send_email(
     subject: str = "Subject of your email",
     attachment: Optional[str] = None
 ):
-    """Send an email with a dynamically inserted tracking link."""
-    
+    """
+    Send an email with a dynamically inserted tracking link.
+
+    **Parameters:**
+    - `db (Session)`: Database session object.
+    - `recipient_email (List[str])`: List of recipient email addresses.
+    - `ab_test_id (int)`: The ID of the A/B test.
+    - `experiment_id (int)`: The ID of the experiment.
+    - `customer_id (int)`: The ID of the customer.
+    - `subject (str)`: The email subject line (default: "Subject of your email").
+    - `attachment (Optional[str])`: Path to a file to attach to the email (default: None).
+
+    **Behavior:**
+    - Inserts a tracking link dynamically into the email body using the A/B test text skeleton.
+    - Stores the click token in the database for future tracking.
+
+    **Raises:**
+    - `FileNotFoundError`: If the attachment file is not found.
+    - `smtplib.SMTPException`: For errors related to email sending.
+    """
     # Generate a unique click token for this email
     click_token = generate_click_token()
 

@@ -214,7 +214,7 @@ def create_engagement(engagement: schemas.EngagementCreate, db: Session = Depend
     - `engagement (EngagementCreate)`: The engagement data to create. This includes:
         - `customer_id (int)`: The ID of the customer (required).
         - `movie_id (int)`: The ID of the movie (required).
-        - `has_watched_fully (bool)`: Whether the customer has watched the movie fully (required).
+        - `watched_fully (bool)`: Whether the customer has watched the movie fully (required).
         - `like_status (str, optional)`: The like status of the movie (optional).
         - `date_watched (str, optional)`: The date when the movie was watched (optional).
     - `db (Session, optional)`: The database session provided by dependency injection.
@@ -347,7 +347,6 @@ def create_ab_test_result(ab_test_result: schemas.ABTestResultCreate, db: Sessio
         - `ab_test_id (int)`: The ID of the A/B test (required).
         - `customer_id (int)`: The ID of the customer who participated in the test (required).
         - `clicked_link (bool)`: Whether the customer clicked the link (required).
-        - `time_spent_seconds (int)`: The time spent by the customer in seconds (required).
     - `db (Session, optional)`: The database session provided by dependency injection.
     
     **Returns:**
