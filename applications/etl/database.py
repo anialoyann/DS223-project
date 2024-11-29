@@ -1,34 +1,15 @@
-"""
-Database Configuration
-"""
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-import sqlalchemy as sql
-import sqlalchemy.ext.declarative as declarative
-import sqlalchemy.orm as orm
-from dotenv import load_dotenv
-import os
+# Database URL (ensure this matches the one in docker-compose.yml)
+DATABASE_URL = "postgresql://username:password@db:5432/mydatabase"
 
-def get_db():
-    """
-    Function to get a database session.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Create the database engine
+engine = create_engine(DATABASE_URL)
 
-# Load environment variables from .env file
-load_dotenv(".env")
+# Create a SessionLocal class to interact with the database
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Get the database URL from environment variables
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-# Create the SQLAlchemy engine
-engine = sql.create_engine(DATABASE_URL)
-
-# Base class for declarative models
-Base = declarative.declarative_base()
-
-# SessionLocal for database operations
-SessionLocal = orm.sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Create a base class for our models
+Base = declarative_base()
