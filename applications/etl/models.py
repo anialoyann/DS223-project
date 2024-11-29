@@ -39,6 +39,7 @@ class Subscription(Base):
     Represents subscription plans for the platform.
 
     **Attributes:**
+
     - `subscription_id (int):` Unique identifier for the subscription.
     - `subscription_name (str):` Name of the subscription plan.
     - `price (int):` Price of the subscription plan.
@@ -54,6 +55,7 @@ class Movie(Base):
     Represents a movie available on the platform.
 
     **Attributes:**
+
     - `movie_id (int):` Unique identifier for the movie.
     - `movie_name (str):` Name of the movie.
     - `release_year (int):` Release year of the movie.
@@ -75,6 +77,7 @@ class Customer(Base):
     Represents a customer using the platform.
 
     **Attributes:**
+
     - `customer_id (int):` Unique identifier for the customer.
     - `name (str):` Name of the customer.
     - `email (str):` Email address of the customer.
@@ -101,6 +104,7 @@ class Segment(Base):
     Represents a customer segment for analysis or targeting.
 
     **Attributes:**
+
     - `segment_id (int):` Unique identifier for the segment.
     - `segment_name (str):` Name of the segment.
     - `segment_description (str):` Description of the segment.
@@ -116,6 +120,7 @@ class CustomerSegment(Base):
     Represents the mapping between customers and segments.
 
     **Attributes:**
+
     - `customer_segment_id (int):` Unique identifier for the mapping.
     - `customer_id (int):` ID of the associated customer.
     - `segment_id (int):` ID of the associated segment.
@@ -136,6 +141,7 @@ class Engagement(Base):
     Represents customer engagement with movies.
 
     **Attributes:**
+
     - `engagement_id (int):` Unique identifier for the engagement.
     - `customer_id (int):` ID of the associated customer.
     - `movie_id (int):` ID of the associated movie.
@@ -164,6 +170,7 @@ class ABTest(Base):
     Represents metadata for an A/B test.
 
     **Attributes:**
+
     - `ab_test_id (int):` Unique identifier for the A/B test.
     - `goal (str):` Goal of the test.
     - `targeting (str):` Targeting criteria for the test.
@@ -183,6 +190,7 @@ class Experiment(Base):
     Represents an experiment tied to A/B tests.
 
     **Attributes:**
+
     - `experiment_id (int):` Unique identifier for the experiment.
     - `p_value (float):` Statistical p-value for the experiment.
     """
@@ -196,6 +204,7 @@ class ABTest_Result(Base):
     Represents results from A/B tests.
 
     **Attributes:**
+    
     - `result_id (int):` Unique identifier for the result.
     - `ab_test_id (int):` ID of the associated A/B test.
     - `customer_id (int):` ID of the associated customer.
