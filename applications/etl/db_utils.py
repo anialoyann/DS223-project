@@ -53,10 +53,13 @@ def insert_row(table, data, retries=5, delay=1):
     -----------
     table : sqlalchemy.Table
         The SQLAlchemy table object where the row will be inserted.
+
     data : dict
         A dictionary containing column names and their corresponding values for the row to insert.
+
     retries : int, optional (default=5)
         Number of retry attempts in case of a unique constraint violation.
+
     delay : int, optional (default=1)
         Delay in seconds between retries.
 
@@ -100,6 +103,7 @@ def delete_row(table, conditions):
     -----------
     table : sqlalchemy.Table
         The SQLAlchemy table object from which rows will be deleted.
+        
     conditions : dict
         A dictionary where keys are column names and values are the matching values to filter rows.
 
