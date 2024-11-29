@@ -47,30 +47,23 @@ Session = sessionmaker(bind=engine)
 
 def insert_row(table, data, retries=5, delay=1):
     """
-    Inserts a row into the specified table, with support for retries in case of unique constraint violations.
-    
-    Parameters:
-    -----------
-    table : sqlalchemy.Table
-        The SQLAlchemy table object where the row will be inserted.
+    Attempt to insert a new row into a database table.
 
-    data : dict
-        A dictionary containing column names and their corresponding values for the row to insert.
+    Handles unique constraint violations gracefully by retrying the operation
+    for a specified number of attempts. This function is ideal for scenarios
+    involving race conditions in database writes.
 
-    retries : int, optional (default=5)
-        Number of retry attempts in case of a unique constraint violation.
-
-    delay : int, optional (default=1)
-        Delay in seconds between retries.
+    Args:
+        table (sqlalchemy.Table): SQLAlchemy table object where the row will be inserted.
+        data (dict): Dictionary mapping column names to values for the new row.
+        retries (int, optional): Number of retry attempts in case of a conflict. Defaults to 5.
+        delay (int, optional): Delay in seconds between retry attempts. Defaults to 1.
 
     Raises:
-    -------
-    SQLAlchemyError
-        If an error other than a unique constraint violation occurs.
+        SQLAlchemyError: If an error other than a unique constraint violation occurs.
 
     Example:
-    --------
-    insert_row(table=CustomerTable, data={"id": 1, "name": "John Doe"})
+        insert_row(table=CustomerTable, data={"id": 1, "name": "John Doe"})
     """
     session = Session()
     try:
@@ -97,24 +90,19 @@ def insert_row(table, data, retries=5, delay=1):
 
 def delete_row(table, conditions):
     """
-    Deletes rows from a specified table based on given conditions.
+    Delete rows from a table based on specified conditions.
 
-    Parameters:
-    -----------
-    table : sqlalchemy.Table
-        The SQLAlchemy table object from which rows will be deleted.
-        
-    conditions : dict
-        A dictionary where keys are column names and values are the matching values to filter rows.
+    Enables efficient row deletion using SQLAlchemy, with conditions passed as a dictionary of column-value pairs.
+
+    Args:
+        table (sqlalchemy.Table): SQLAlchemy table object from which rows will be deleted.
+        conditions (dict): Dictionary of column-value pairs to filter rows for deletion.
 
     Raises:
-    -------
-    SQLAlchemyError
-        If an error occurs during the deletion.
+        SQLAlchemyError: If an error occurs during the deletion process.
 
     Example:
-    --------
-    delete_row(table=CustomerTable, conditions={"id": 1, "name": "John Doe"})
+        delete_row(table=CustomerTable, conditions={"id": 1, "name": "John Doe"})
     """
     session = Session()
     try:
@@ -132,26 +120,21 @@ def delete_row(table, conditions):
 
 def export_to_dataframe(table):
     """
-    Exports all rows from a specified table into a Pandas DataFrame.
+    Export all data from a database table into a Pandas DataFrame.
 
-    Parameters:
-    -----------
-    table : sqlalchemy.Table
-        The SQLAlchemy table object to export data from.
+    Useful for integrating database data with Python's data analysis ecosystem. The function handles the conversion of SQLAlchemy query results to a Pandas DataFrame seamlessly.
+
+    Args:
+        table (sqlalchemy.Table): SQLAlchemy table object to export data from.
 
     Returns:
-    --------
-    pd.DataFrame
-        A Pandas DataFrame containing all rows from the specified table.
+        pd.DataFrame: A Pandas DataFrame containing the table's data.
 
     Raises:
-    -------
-    SQLAlchemyError
-        If an error occurs during the data export.
+        SQLAlchemyError: If an error occurs during data export.
 
     Example:
-    --------
-    df = export_to_dataframe(table=CustomerTable)
+        df = export_to_dataframe(table=CustomerTable)
     """
     session = Session()
     try:
