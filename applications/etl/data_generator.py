@@ -120,7 +120,7 @@ def generate_segment(segment_id):
     else:
         raise ValueError("Invalid subscription_id: no predefined subscription exists with this ID.")
     
-def generate_customer(customer_id, subscription_id):
+def generate_customer(subscription_id):
     """
     Generate a mock customer record.
 
@@ -134,7 +134,6 @@ def generate_customer(customer_id, subscription_id):
     created_at = fake.date_time_this_decade()
     updated_at = fake.date_time_between(start_date=created_at, end_date="now")
     return {
-        "customer_id": customer_id,
         "name": fake.name(),
         "email": fake.email(),
         "subscription_id": subscription_id,

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Base Schema for common fields
 class BaseSchema(BaseModel):
@@ -13,19 +13,7 @@ class BaseSchema(BaseModel):
     class Config:
         orm_mode = True
 
-# Segment Schema
-class SegmentBase(BaseSchema):
-    """
-    Schema for the base structure of a Segment.
-
-    **Attributes:**
-    - `segment_name (str)`: Name of the segment.
-    - `segment_description (Optional[str])`: Description of the segment (optional).
-    """
-    segment_name: str
-    segment_description: Optional[str] = None
-
-class SegmentCreate(SegmentBase):
+class SegmentCreate(BaseModel):
     """
     Schema for creating a new Segment.
 
@@ -34,7 +22,7 @@ class SegmentCreate(SegmentBase):
     """
     pass
 
-class Segment(SegmentBase):
+class Segment(BaseModel):
     """
     Schema for representing an existing Segment.
 
@@ -42,56 +30,38 @@ class Segment(SegmentBase):
     - `segment_id (int)`: Unique identifier for the segment.
     """
     segment_id: int
+    segment_name: str
+    segment_description: Optional[str] = None
 
-# Customer Schema
-class CustomerBase(BaseSchema):
+class Customer(BaseSchema):
     """
-    Schema for the base structure of a Customer.
-
-    **Attributes:**
-    - `name (str)`: Name of the customer.
-    - `email (str)`: Unique email address of the customer.
-    - `location (Optional[str])`: Location of the customer (optional).
+    Schema for representing an existing Customer.
     """
+    customer_id: int
     name: str
     email: str
+    subscription_id: int
     location: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
 
-class CustomerCreate(CustomerBase):
+class CustomerCreate(BaseSchema):
     """
     Schema for creating a new Customer.
 
     **Attributes:**
     - `subscription_id (int)`: ID of the subscription associated with the customer.
     """
+    name: str
+    email: str
+    location: Optional[str] = None
+    #created_at: datetime
+    #updated_at: datetime
     subscription_id: int
 
-class Customer(CustomerBase):
-    """
-    Schema for representing an existing Customer.
 
-    **Attributes:**
-    - `customer_id (int)`: Unique identifier for the customer.
-    - `created_at (Optional[str])`: Timestamp when the customer was created (optional).
-    - `updated_at (Optional[str])`: Timestamp when the customer was last updated (optional).
-    """
-    customer_id: int
-    created_at: Optional[str] = None
-    updated_at: Optional[str] = None
 
-# Customer Segment Schema
-class CustomerSegmentBase(BaseSchema):
-    """
-    Schema for the base structure of a Customer-Segment relationship.
-
-    **Attributes:**
-    - `customer_id (int)`: ID of the customer in the relationship.
-    - `segment_id (int)`: ID of the segment in the relationship.
-    """
-    customer_id: int
-    segment_id: int
-
-class CustomerSegmentCreate(CustomerSegmentBase):
+class CustomerSegmentCreate(BaseModel):
     """
     Schema for creating a new Customer-Segment relationship.
 
@@ -100,7 +70,7 @@ class CustomerSegmentCreate(CustomerSegmentBase):
     """
     pass
 
-class CustomerSegment(CustomerSegmentBase):
+class CustomerSegment(BaseModel):
     """
     Schema for representing an existing Customer-Segment relationship.
 
@@ -108,26 +78,11 @@ class CustomerSegment(CustomerSegmentBase):
     - `customer_segment_id (int)`: Unique identifier for the relationship.
     """
     customer_segment_id: int
+    customer_id: int
+    segment_id: int
 
-# Movie Schema
-class MovieBase(BaseSchema):
-    """
-    Schema for the base structure of a Movie.
 
-    **Attributes:**
-    - `movie_name (str)`: Name of the movie.
-    - `movie_rating (Optional[float])`: Rating of the movie (optional).
-    - `movie_duration (Optional[int])`: Duration of the movie in minutes (optional).
-    - `movie_genre (Optional[str])`: Genre of the movie (optional).
-    - `release_year (Optional[int])`: Year the movie was released (optional).
-    """
-    movie_name: str
-    movie_rating: Optional[float] = None
-    movie_duration: Optional[int] = None
-    movie_genre: Optional[str] = None
-    release_year: Optional[int] = None
-
-class MovieCreate(MovieBase):
+class MovieCreate(BaseModel):
     """
     Schema for creating a new Movie.
 
@@ -136,7 +91,7 @@ class MovieCreate(MovieBase):
     """
     pass
 
-class Movie(MovieBase):
+class Movie(BaseModel):
     """
     Schema for representing an existing Movie.
 
@@ -144,6 +99,12 @@ class Movie(MovieBase):
     - `movie_id (int)`: Unique identifier for the movie.
     """
     movie_id: int
+    movie_name: str
+    movie_rating: Optional[float] = None
+    movie_duration: Optional[int] = None
+    movie_genre: Optional[str] = None
+    release_year: Optional[int] = None
+
 
 # Engagement Schema
 class EngagementBase(BaseSchema):

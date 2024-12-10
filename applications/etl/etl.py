@@ -70,7 +70,7 @@ logger.info(f'Subscription Data saved to CSV: {subscriptions.shape}')
 
 # Generate Customers
 customers = pd.DataFrame(
-    [generate_customer(customer_id, random.randint(1, NUMBER_OF_SUBSCRIPTIONS)) for customer_id in range(1, NUMBER_OF_CUSTOMERS + 1)]
+    [generate_customer(random.randint(1, NUMBER_OF_SUBSCRIPTIONS)) for _ in range(1, NUMBER_OF_CUSTOMERS + 1)]
 )
 logger.info('Customer Data')
 logger.info(customers.head())

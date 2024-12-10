@@ -29,7 +29,7 @@ from loguru import logger
 from sqlalchemy import create_engine,Column,Integer,String,Float, DATE, DateTime, ForeignKey, Text, JSON, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
-from datetime import datetime
+from datetime import datetime, timezone
 from database import Base, engine
 
 Base= declarative_base()
@@ -89,13 +89,13 @@ class Customer(Base):
     """
     __tablename__ = "customers"
 
-    customer_id = Column(Integer, primary_key=True)
+    customer_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     email = Column(String)
     subscription_id = Column(Integer, ForeignKey("subscriptions.subscription_id"))
     location = Column(String)
-    created_at = Column(DateTime) 
-    updated_at = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.now())  
+    updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
 
     subscription = relationship("Subscription")
 

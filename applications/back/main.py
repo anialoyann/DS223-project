@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database1 import engine, SessionLocal
 import models1 as models1,schema1 as schemas
 from email_utils import send_email 
+from datetime import datetime, timezone
 
 
 # Creating database tables
@@ -92,27 +93,29 @@ def read_segments(skip: int = 0, limit: int = 10, db: Session = Depends(get_db))
     """
     return db.query(models1.Segment).offset(skip).limit(limit).all()
 
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+
 # CRUD for Customers
-@app.post("/customers/", response_model=schemas.Customer)
+@app.post("/customers/")
 def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
-    """
-    Create a new customer.
-    
-    **Parameters:**
-    - `customer (CustomerCreate)`: The customer data to create. This includes:
-        - `name (str)`: The name of the customer (required).
-        - `email (str)`: The email of the customer (required).
-        - `location (str, optional)`: The location of the customer (optional).
-    - `db (Session, optional)`: The database session provided by dependency injection.
-    
-    **Returns:**
-    - `Customer`: The newly created customer's details, including `customer_id`.
-    """
-    db_customer = models1.Customer(**customer.dict())
-    db.add(db_customer)
+    new_customer = models1.Customer(
+        name=customer.name,
+        email=customer.email,
+        subscription_id=customer.subscription_id,
+        location=customer.location
+    )
+    db.add(new_customer)
     db.commit()
-    db.refresh(db_customer)
-    return db_customer
+    return schemas.Customer(
+        customer_id=new_customer.customer_id,
+        name=new_customer.name,
+        email=new_customer.email,
+        subscription_id=new_customer.subscription_id,
+        location=new_customer.location,
+        created_at=new_customer.created_at,
+        updated_at=new_customer.updated_at
+    )
 
 @app.get("/customers/", response_model=list[schemas.Customer])
 def read_customers(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):

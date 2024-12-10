@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, Float, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from database1 import Base
+from datetime import datetime, timezone
 
 # Segments Model
 class Segment(Base):
@@ -37,13 +38,13 @@ class Customer(Base):
     - `ab_test_results (relationship)`: Association with the `ABTestResult` model for test results.
     """
     __tablename__ = "customers"
-    customer_id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     subscription_id = Column(Integer, ForeignKey("subscriptions.subscription_id"))
     location = Column(String)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.now())  
+    updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
     segments = relationship("CustomerSegment", back_populates="customer")
     engagements = relationship("Engagement", back_populates="customer")
     ab_test_results = relationship("ABTestResult", back_populates="customer")
