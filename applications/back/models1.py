@@ -3,6 +3,8 @@ from sqlalchemy.orm import relationship
 from database1 import Base
 from datetime import datetime, timezone
 
+
+
 # Segments Model
 class Segment(Base):
     """

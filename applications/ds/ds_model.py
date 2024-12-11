@@ -11,10 +11,12 @@ DATABASE_URL = "postgresql+psycopg2://postgres:password@localhost:5432/ds223_gp_
 def calculate_customer_segments():
     """
     Calculate customer segments based on a scoring system using adjusted thresholds.
+    Automatically assigns customers with no engagement data to segment ID 1 (Lost Cause).
     """
     # Database connection URL
     DATABASE_URL = "postgresql+psycopg2://postgres:password@localhost:5432/ds223_gp_db"
     delete_customer_segments_table()
+    print("heloooo??")
     # Create the engine
     engine = create_engine(DATABASE_URL)
     
@@ -24,6 +26,7 @@ def calculate_customer_segments():
             "SELECT customer_id, created_at, updated_at, subscription_id FROM customers", 
             con=connection
         )
+        print(f"Number of customers currently: {len(customers_df)}")
         engagements_df = pd.read_sql(
             "SELECT customer_id, engagement_id, session_date, session_duration, watched_fully, like_status FROM engagements", 
             con=connection
@@ -57,9 +60,19 @@ def calculate_customer_segments():
         engagements_agg['recency'] = (current_date - pd.to_datetime(engagements_agg['last_session_date'])).dt.days
 
         # Join with subscription data
-        data = pd.merge(engagements_agg, customers_df, on='customer_id', how='left')
+        data = pd.merge(engagements_agg, customers_df, on='customer_id', how='right')
         data = pd.merge(data, subscriptions_df, on='customer_id', how='left')
         data['monetary'] = data['price']  # Use subscription price as monetary value
+
+        # Fill missing engagement data for customers without engagements
+        data['frequency'].fillna(0, inplace=True)
+        data['total_duration'].fillna(0, inplace=True)
+        data['watched_fully_true'].fillna(0, inplace=True)
+        data['watched_fully_false'].fillna(0, inplace=True)
+        data['liked_count'].fillna(0, inplace=True)
+        data['disliked_count'].fillna(0, inplace=True)
+        data['last_session_date'].fillna(current_date, inplace=True)
+        data['recency'].fillna(9999, inplace=True)  # Assign a high recency value for customers without sessions
 
         # Define scoring functions
         def score_frequency(value):
@@ -133,11 +146,12 @@ def calculate_customer_segments():
             data['score_liked_count'] +
             data['score_disliked_count']
         )
-        #print("Data with total scores:\n", data[['customer_id', 'total_score']].head())
 
         # Assign segments based on total score
-        def assign_segment(score):
-            if score <= 15:
+        def assign_segment(score, has_engagements):
+            if not has_engagements:
+                return 1  # Lost Cause
+            elif score <= 15:
                 return 1  # Lost Cause
             elif score <= 25:
                 return 2  # Vulnerable Customers
@@ -146,15 +160,14 @@ def calculate_customer_segments():
             else:
                 return 4  # Star Customers
 
-        data['segment_id'] = data['total_score'].apply(assign_segment)
-        #print("Data with assigned segments:\n", data[['customer_id', 'total_score', 'segment_id']].head())
+        data['has_engagements'] = data['frequency'] > 0
+        data['segment_id'] = data.apply(lambda row: assign_segment(row['total_score'], row['has_engagements']), axis=1)
 
         # Generate sequential customer_segment_id starting from 1
         data['customer_segment_id'] = range(1, len(data) + 1)
 
         # Prepare data for insertion into customer_segments table
         customer_segments_data = data[['customer_segment_id', 'customer_id', 'segment_id']]
-        #print("Prepared data for insertion:\n", customer_segments_data.head())
 
         # Perform deletion and insertion
         customer_ids = customer_segments_data['customer_id'].tolist()
@@ -163,12 +176,10 @@ def calculate_customer_segments():
             {'customer_ids': customer_ids}
         )
         customer_segments_data.to_sql('customer_segments', con=engine, if_exists='append', index=False)
-        #print("Inserted rows successfully!")
     
     # Return the final customer_segments table
     with engine.connect() as connection:
         final_table = pd.read_sql("SELECT * FROM customer_segments", con=connection)
-        #print("Final customer_segments table:\n", final_table.head())
     
     return final_table
 
@@ -247,5 +258,6 @@ def delete_customer_segments_table():
     # Connect to the database and delete table contents
     with engine.begin() as connection:  # Automatically handles commit/rollback
         connection.execute(text("DELETE FROM customer_segments;"))
+        print("hellooo from the other side??? again???")
         print("Deleted all rows from the customer_segments table.")
 

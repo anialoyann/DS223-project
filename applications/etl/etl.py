@@ -33,11 +33,13 @@ from data_generator import (
 )
 
 
+logger.add("etl_logs.log", level="INFO")
+
 # -----------------------------------------------------
 # Pause Script Execution
 # -----------------------------------------------------
 print("Pausing for 60 seconds...")
-time.sleep(60)
+time.sleep(20)
 print("Resuming execution.")
 
 # -----------------------------------------------------
@@ -97,8 +99,8 @@ logger.info(f'Movie Data saved to CSV: {movies.shape}')
 
 # Generate Engagements
 engagements = pd.DataFrame(
-    [generate_engagement(engagement_id, customer_id=random.randint(1, NUMBER_OF_CUSTOMERS), movie_id=random.randint(1, NUMBER_OF_MOVIES))
-     for engagement_id in range(1, NUMBER_OF_ENGAGEMENTS + 1)]
+    [generate_engagement(customer_id=random.randint(1, NUMBER_OF_CUSTOMERS), movie_id=random.randint(1, NUMBER_OF_MOVIES))
+     for _ in range(1, NUMBER_OF_ENGAGEMENTS + 1)]
 )
 logger.info('Engagement Data')
 logger.info(engagements.head())
@@ -153,7 +155,8 @@ def load_csv_to_table(table_name, csv_path):
     """
     df = pd.read_csv(csv_path)
     df.to_sql(table_name, con=engine, if_exists="append", index=False)
-    logger.info(f'Loading {table_name}')
+    logger.info(f'Loading table: {table_name} from {csv_path}')
+
 
 # Load data from CSVs into the database
 import glob
@@ -161,13 +164,17 @@ from os import path
 
 folder_path = "data/*.csv"
 
+# Get the list of files and their corresponding table names
 files = glob.glob(folder_path)
 base_names = [path.splitext(path.basename(file))[0] for file in files]
-for table in base_names:
-    try:
-        load_csv_to_table(table, path.join("data/", f"{table}.csv"))
-    except Exception as e:
-        print(f"Failed to ingest table {table}. Moving to the next!")
 
-print("Tables are populated.")
+# Manually ordering the tables for loading based on dependencies
+ordered_tables = ["subscriptions", "movies", "customers", "segments", "engagements", "ab_tests", "ab_test_results", "customer_segments", "experiments"]
 
+# Iterate through the ordered table list and load their corresponding CSVs
+for table in ordered_tables:
+    csv_file = path.join("data/", f"{table}.csv")
+    if csv_file in files:
+        load_csv_to_table(table, csv_file)
+
+print("All tables are populated in the defined order.")

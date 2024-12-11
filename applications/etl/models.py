@@ -153,8 +153,8 @@ class Engagement(Base):
     - `movie (Movie):` Relationship to the Movie model.
     """
     __tablename__ = "engagements"
-    
-    engagement_id = Column(Integer, primary_key=True)
+
+    engagement_id = Column(Integer, primary_key=True, autoincrement=True)
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
     movie_id =  Column(Integer, ForeignKey("movies.movie_id"))
     session_date = Column(DateTime)
@@ -196,7 +196,7 @@ class Experiment(Base):
     """
     __tablename__ = "experiments"
     
-    experiment_id = Column(Integer, primary_key=True)
+    experiment_id = Column(Integer, primary_key=True, autoincrement = True)
     p_value = Column(Float)
 
 class ABTest_Result(Base):
@@ -216,7 +216,7 @@ class ABTest_Result(Base):
     """
     __tablename__ = "ab_test_results"
 
-    result_id = Column(Integer, primary_key=True)
+    result_id = Column(Integer, primary_key=True, autoincrement = True)
     ab_test_id = Column(Integer, ForeignKey("ab_tests.ab_test_id"))
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
     experiment_id = Column(Integer, ForeignKey("experiments.experiment_id"))

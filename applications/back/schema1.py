@@ -60,6 +60,10 @@ class CustomerCreate(BaseSchema):
     subscription_id: int
 
 
+class EmailRequest(BaseModel):
+    segment_name: str
+    text_skeleton_1: str
+    text_skeleton_2: str
 
 class CustomerSegmentCreate(BaseModel):
     """

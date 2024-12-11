@@ -142,7 +142,7 @@ def generate_customer(subscription_id):
         "updated_at": updated_at,
     }
 
-def generate_engagement(engagement_id, customer_id, movie_id):
+def generate_engagement(customer_id, movie_id):
     """
     Generate a mock engagement record between a customer and a movie.
 
@@ -155,7 +155,6 @@ def generate_engagement(engagement_id, customer_id, movie_id):
         dict: A dictionary containing engagement details.
     """
     return {
-        "engagement_id": engagement_id,
         "customer_id": customer_id,
         "movie_id": movie_id,
         "session_date": fake.date_this_year(),

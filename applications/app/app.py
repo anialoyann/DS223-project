@@ -237,8 +237,22 @@ if page == "Start A/B Testing":
             st.write("Here are the generated messages:")
             for result in st.session_state.results:
                 st.markdown(f"- {result}")
+
+            response = requests.post(
+                    f"{API_URL}/send-emails",
+                    json={
+                        "segment_name": st.session_state.selected_segment,
+                        "text_skeleton_1": st.session_state.results[0],
+                        "text_skeleton_2": st.session_state.results[1]     }
+                )
+            if response.status_code == 200:
+                st.success(response.json()["message"])
+            else:
+                st.error(f"Failed to send emails: {response.json()['detail']}")    
         else:
             st.write("No results available.")
+        
+        
 
         st.subheader("You will see the results in 2 minutes.")
         if st.button("View the results"):

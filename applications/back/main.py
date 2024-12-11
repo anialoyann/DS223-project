@@ -4,13 +4,15 @@ from database1 import engine, SessionLocal
 import models1 as models1,schema1 as schemas
 from email_utils import send_email 
 from datetime import datetime, timezone
-
+import pandas as pd
+import requests
+from loguru import logger
 
 # Creating database tables
 models1.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-
+'''
 @app.get("/test-send-email")
 async def test_send_email():
     """
@@ -33,6 +35,137 @@ async def test_send_email():
     send_email(recipient_email, subject, body)
     
     return {"message": "Test email sent successfully!"}
+
+'''
+
+import logging
+
+# Set up logging configuration
+logging.basicConfig(
+    filename="email_sending.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
+
+
+
+
+@app.post("/send-emails")
+async def send_emails(request: schemas.EmailRequest):
+    """
+    Send personalized emails to customers in the selected segment, only for customer_id=2001.
+
+    **Parameters:**
+    - `segment_name (str)`: The name of the customer segment.
+    - `text_skeleton_1 (str)`: The first email skeleton message.
+    - `text_skeleton_2 (str)`: The second email skeleton message.
+
+    **Returns:**
+    - `message (str)`: Success message with the count of emails sent.
+
+    **Raises:**
+    - `HTTPException`: If no customers are found or an error occurs while sending emails.
+    """
+    segment_name = request.segment_name
+    text_skeleton_1 = request.text_skeleton_1
+    text_skeleton_2 = request.text_skeleton_2
+
+    try:
+        # Fetch the customers table using the provided API
+        customers_response = requests.get("http://localhost:8000/customers/", timeout=10)
+        if customers_response.status_code != 200:
+            raise HTTPException(
+                status_code=500, detail="Failed to fetch customers from the API."
+            )
+        customers_df = pd.DataFrame(customers_response.json())
+
+        if customers_df.empty:
+            raise HTTPException(status_code=404, detail="Customers table is empty.")
+
+        # Fetch the customer_segments table using the provided API
+        customer_segments_response = requests.get("http://localhost:8000/customer_segments/", timeout=10)
+        if customer_segments_response.status_code != 200:
+            raise HTTPException(
+                status_code=500, detail="Failed to fetch customer segments from the API."
+            )
+        customer_segments_df = pd.DataFrame(customer_segments_response.json())
+
+        if customer_segments_df.empty:
+            raise HTTPException(status_code=404, detail="Customer segments table is empty.")
+
+        # Fetch the segments table using the provided API
+        segments_response = requests.get("http://localhost:8000/segments/", timeout=10)
+        if segments_response.status_code != 200:
+            raise HTTPException(
+                status_code=500, detail="Failed to fetch segments from the API."
+            )
+        segments_df = pd.DataFrame(segments_response.json())
+
+        if segments_df.empty:
+            raise HTTPException(status_code=404, detail="Segments table is empty.")
+
+        # Get the segment ID for the given segment name
+        segment_id = segments_df.loc[
+            segments_df["segment_name"].str.lower() == segment_name.lower(), "segment_id"
+        ].squeeze()
+
+        if pd.isnull(segment_id):
+            raise HTTPException(status_code=404, detail=f"Segment '{segment_name}' not found.")
+
+        # Filter customer_segments by segment_id
+        customer_segment_filtered = customer_segments_df[
+            customer_segments_df["segment_id"] == segment_id
+        ]
+
+        if customer_segment_filtered.empty:
+            raise HTTPException(
+                status_code=404, detail=f"No customers found for the segment '{segment_name}'."
+            )
+
+        # Join with customers to get name and email
+        customers_filtered = customer_segment_filtered.merge(
+            customers_df, left_on="customer_id", right_on="customer_id"
+        )
+
+        if customers_filtered.empty:
+            raise HTTPException(
+                status_code=404, detail="No matching customer details found after filtering."
+            )
+
+        # Only process customers with customer_id=2001
+        customers_filtered = customers_filtered[customers_filtered["customer_id"] == 2001]
+
+        if customers_filtered.empty:
+            raise HTTPException(
+                status_code=404, detail="No customers with customer_id=2001 found in the segment."
+            )
+
+        # Send emails
+        emails_sent = 0
+
+        for _, customer in customers_filtered.iterrows():
+            try:
+                first_name = customer["name"].split(" ")[0]
+                email_body = text_skeleton_1  # Default to text_skeleton_1 for the single customer
+                send_email(
+                    recipient_email=[customer["email"]],
+                    subject=f"Exciting News",
+                    body=f"Hi {first_name}!\n\n{email_body}",
+                )
+                logger.info(f"Email sent successfully to {customer['email']}.")
+                emails_sent += 1
+            except Exception as e:
+                logger.warning(f"Failed to send email to {customer['email']}: {e}")
+
+        return {"message": f"Emails sent successfully to {emails_sent} customers."}
+
+    except HTTPException as http_exc:
+        logger.error(f"HTTP Exception: {http_exc.detail}")
+        raise http_exc
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+
 
 # Dependency to get DB session
 def get_db():
