@@ -7,12 +7,13 @@ from datetime import datetime, timezone
 import pandas as pd
 import requests
 from loguru import logger
+import uuid
 
 # Creating database tables
 models1.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-'''
+
 @app.get("/test-send-email")
 async def test_send_email():
     """
@@ -36,7 +37,7 @@ async def test_send_email():
     
     return {"message": "Test email sent successfully!"}
 
-'''
+
 
 import logging
 
@@ -46,125 +47,6 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
-
-
-
-
-@app.post("/send-emails")
-async def send_emails(request: schemas.EmailRequest):
-    """
-    Send personalized emails to customers in the selected segment, only for customer_id=2001.
-
-    **Parameters:**
-    - `segment_name (str)`: The name of the customer segment.
-    - `text_skeleton_1 (str)`: The first email skeleton message.
-    - `text_skeleton_2 (str)`: The second email skeleton message.
-
-    **Returns:**
-    - `message (str)`: Success message with the count of emails sent.
-
-    **Raises:**
-    - `HTTPException`: If no customers are found or an error occurs while sending emails.
-    """
-    segment_name = request.segment_name
-    text_skeleton_1 = request.text_skeleton_1
-    text_skeleton_2 = request.text_skeleton_2
-
-    try:
-        # Fetch the customers table using the provided API
-        customers_response = requests.get("http://localhost:8000/customers/", timeout=10)
-        if customers_response.status_code != 200:
-            raise HTTPException(
-                status_code=500, detail="Failed to fetch customers from the API."
-            )
-        customers_df = pd.DataFrame(customers_response.json())
-
-        if customers_df.empty:
-            raise HTTPException(status_code=404, detail="Customers table is empty.")
-
-        # Fetch the customer_segments table using the provided API
-        customer_segments_response = requests.get("http://localhost:8000/customer_segments/", timeout=10)
-        if customer_segments_response.status_code != 200:
-            raise HTTPException(
-                status_code=500, detail="Failed to fetch customer segments from the API."
-            )
-        customer_segments_df = pd.DataFrame(customer_segments_response.json())
-
-        if customer_segments_df.empty:
-            raise HTTPException(status_code=404, detail="Customer segments table is empty.")
-
-        # Fetch the segments table using the provided API
-        segments_response = requests.get("http://localhost:8000/segments/", timeout=10)
-        if segments_response.status_code != 200:
-            raise HTTPException(
-                status_code=500, detail="Failed to fetch segments from the API."
-            )
-        segments_df = pd.DataFrame(segments_response.json())
-
-        if segments_df.empty:
-            raise HTTPException(status_code=404, detail="Segments table is empty.")
-
-        # Get the segment ID for the given segment name
-        segment_id = segments_df.loc[
-            segments_df["segment_name"].str.lower() == segment_name.lower(), "segment_id"
-        ].squeeze()
-
-        if pd.isnull(segment_id):
-            raise HTTPException(status_code=404, detail=f"Segment '{segment_name}' not found.")
-
-        # Filter customer_segments by segment_id
-        customer_segment_filtered = customer_segments_df[
-            customer_segments_df["segment_id"] == segment_id
-        ]
-
-        if customer_segment_filtered.empty:
-            raise HTTPException(
-                status_code=404, detail=f"No customers found for the segment '{segment_name}'."
-            )
-
-        # Join with customers to get name and email
-        customers_filtered = customer_segment_filtered.merge(
-            customers_df, left_on="customer_id", right_on="customer_id"
-        )
-
-        if customers_filtered.empty:
-            raise HTTPException(
-                status_code=404, detail="No matching customer details found after filtering."
-            )
-
-        # Only process customers with customer_id=2001
-        customers_filtered = customers_filtered[customers_filtered["customer_id"] == 2001]
-
-        if customers_filtered.empty:
-            raise HTTPException(
-                status_code=404, detail="No customers with customer_id=2001 found in the segment."
-            )
-
-        # Send emails
-        emails_sent = 0
-
-        for _, customer in customers_filtered.iterrows():
-            try:
-                first_name = customer["name"].split(" ")[0]
-                email_body = text_skeleton_1  # Default to text_skeleton_1 for the single customer
-                send_email(
-                    recipient_email=[customer["email"]],
-                    subject=f"Exciting News",
-                    body=f"Hi {first_name}!\n\n{email_body}",
-                )
-                logger.info(f"Email sent successfully to {customer['email']}.")
-                emails_sent += 1
-            except Exception as e:
-                logger.warning(f"Failed to send email to {customer['email']}: {e}")
-
-        return {"message": f"Emails sent successfully to {emails_sent} customers."}
-
-    except HTTPException as http_exc:
-        logger.error(f"HTTP Exception: {http_exc.detail}")
-        raise http_exc
-    except Exception as e:
-        logger.error(f"An unexpected error occurred: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
 
 
 # Dependency to get DB session
@@ -189,6 +71,102 @@ def read_root():
     - `message`: A simple welcome message confirming that the app is working.
     """
     return {"message": "Welcome to the FastAPI application!"}
+
+@app.post("/send-emails")
+async def send_emails(request: schemas.EmailRequest, db: Session = Depends(get_db)):
+    """
+    Send personalized emails to customers in the selected segment and track performance.
+
+    **Parameters:**
+    - `segment_name (str)`: The name of the customer segment.
+    - `text_skeleton_1 (str)`: The first email skeleton message.
+    - `text_skeleton_2 (str)`: The second email skeleton message.
+
+    **Returns:**
+    - `message (str)`: Success message with the count of emails sent.
+    """
+    segment_name = request.segment_name
+    text_skeleton_1 = request.text_skeleton_1
+    text_skeleton_2 = request.text_skeleton_2
+
+    try:
+        # Fetch target customers
+        target_customers = (
+            db.query(models1.Customer)
+            .join(models1.CustomerSegment, models1.Customer.customer_id == models1.CustomerSegment.customer_id)
+            .join(models1.Segment, models1.CustomerSegment.segment_id == models1.Segment.segment_id)
+            .filter(
+                models1.Segment.segment_name.ilike(segment_name),
+                models1.Customer.customer_id > 2000
+            )
+            .all()
+        )
+
+        if not target_customers:
+            raise HTTPException(
+                status_code=404, detail=f"No customers found for the segment '{segment_name}'."
+            )
+
+        # Split customers into two groups for A/B testing
+        mid_index = len(target_customers) // 2
+        group_1 = target_customers[:mid_index]
+        group_2 = target_customers[mid_index:]
+
+        # Add a new entry to the Engagements table
+        new_experiment = models1.Experiment(p_value=None)
+        db.add(new_experiment)
+        db.commit()
+        db.refresh(new_experiment)
+
+        # Send emails with tracking links
+        emails_sent = 0
+
+        for idx, group in enumerate([group_1, group_2]):
+            skeleton = text_skeleton_1 if idx == 0 else text_skeleton_2
+            for customer in group:
+                try:
+                    # Generate tracking link
+                    tracking_token = str(uuid.uuid4())
+                    tracking_url = (
+                        f"http://localhost:8000/track/click/{new_experiment.experiment_id}/{customer.customer_id}/{tracking_token}"
+                    )
+
+                    # Insert click tracking data into ab_test_results
+                    ab_test_result = models1.ABTestResult(
+                        ab_test_id=new_experiment.experiment_id,
+                        experiment_id=new_experiment.experiment_id,
+                        customer_id=customer.customer_id,
+                        clicked_link=False,  # Default to False; updated upon click
+                    )
+                    db.add(ab_test_result)
+
+                    # Send email
+                    first_name = customer.name.split(" ")[0]
+                    email_body = email_body = f"{skeleton}\n\nClick here to learn more: {tracking_url}"
+                    send_email(
+                        recipient_email=[customer.email],
+                        subject="Exciting News",
+                        body=f"Hi {first_name}!\n\n{email_body}",
+                    )
+                    logger.info(f"Email sent successfully to {customer.email}.")
+                    emails_sent += 1
+                except Exception as e:
+                    logger.warning(f"Failed to send email to {customer.email}: {e}")
+
+        # Commit the tracking data to the database
+        db.commit()
+
+        return {"message": f"Emails sent successfully to {emails_sent} customers."}
+
+    except HTTPException as http_exc:
+        logger.error(f"HTTP Exception: {http_exc.detail}")
+        raise http_exc
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+
+
+
 
 # CRUD for Segments
 @app.post("/segments/", response_model=schemas.Segment)
@@ -515,7 +493,7 @@ def read_ab_test_results(skip: int = 0, limit: int = 10, db: Session = Depends(g
     """
     return db.query(models1.ABTestResult).offset(skip).limit(limit).all()
 
-# Endpoint for running an A/B test for a subscription goal
+'''# Endpoint for running an A/B test for a subscription goal
 @app.post("/run_ab_test_subscription/")
 async def run_ab_test_subscription(
     segment_id: int, package_type: str, text_a: str, text_b: str, db: Session = Depends(get_db)
@@ -648,49 +626,7 @@ async def run_ab_test_engagement(
 
     return {"message": "Engagement A/B test created and emails sent to segment", "ab_test_id": ab_test.ab_test_id}
 
-
-@app.post("/send_email/")
-async def send_email_to_customer(
-    customer_id: int, 
-    ab_test_id: int, 
-    experiment_id: int, 
-    db: Session = Depends(get_db)
-):
-    """
-    Sends an email to a customer with a tracking link for A/B testing.
-
-    This endpoint retrieves the customer's email from the database, 
-    generates a tracking URL with a unique token, and sends the email 
-    with the A/B test tracking link.
-
-    **Parameters:**
-    - `customer_id (int)`: The ID of the customer to whom the email will be sent.
-    - `ab_test_id (int)`: The ID of the A/B test associated with the email.
-    - `experiment_id (int)`: The ID of the experiment within the A/B test.
-    - `db (Session)`: The database session to query the database.
-
-    **Returns:**
-    - A success message confirming the email was sent.
-
-    **Raises:**
-    - `HTTPException`: If the customer cannot be found in the database, a 404 error will be raised.
-    """
-    customer = db.query(models1.Customer).filter(models1.Customer.customer_id == customer_id).first()
-    if not customer:
-        raise HTTPException(status_code=404, detail="Customer not found")
-
-    recipient_email = [customer.email]
-
-    send_email(
-        db=db,
-        recipient_email=recipient_email,
-        ab_test_id=ab_test_id,
-        experiment_id=experiment_id,
-        customer_id=customer_id,
-        subject="Participate in Our A/B Test"
-    )
-
-    return {"message": "Email sent successfully to the customer."}
+'''
 
 @app.get("/track/click/{ab_test_id}/{experiment_id}/{customer_id}")
 async def track_click(

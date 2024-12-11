@@ -154,6 +154,7 @@ def send_email(
 '''
 
 
+
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -163,8 +164,8 @@ import uuid
 # Configuration variables (replace with your actual values)
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
-SENDER_EMAIL = "your_email@gmail.com"
-SENDER_PASSWORD = "your_email_password"
+SENDER_EMAIL = "ani.aloyan2003@gmail.com"  # Your Gmail address
+SENDER_PASSWORD = "roky gfog rwix fhjv"  # Your Gmail App Password (not regular password)
 
 def generate_click_token() -> str:
     """

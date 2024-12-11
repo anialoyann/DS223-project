@@ -60,12 +60,23 @@ def add_customer_to_backend(name, email, location, sub_id):
     response = requests.post(f"{API_URL}/customers/", json=payload)
     return response
 
+def send_emails(segment_name, text_skeleton_1, text_skeleton_2):
+    """Function to send emails using the API."""
+    response = requests.post(
+        f"{API_URL}/send-emails",
+        json={
+            "segment_name": segment_name,
+            "text_skeleton_1": text_skeleton_1,
+            "text_skeleton_2": text_skeleton_2
+        }
+    )
+    return response
+
 st.sidebar.title("Menu")
 page = st.sidebar.radio(
     "Navigation",
     ["General", "Dashboard", "Start A/B Testing", "Settings"],
 )
-
 
 if page == "General":
     st.title("Welcome!")
@@ -192,7 +203,18 @@ if page == "Start A/B Testing":
                 )
                 st.session_state.results_ready = True
                 st.session_state.results = results.tolist()
-                st.session_state.ab_step = "results_ready"
+
+                # Trigger send-emails API call
+                response = send_emails(
+                    st.session_state.selected_segment,
+                    st.session_state.results[0],
+                    st.session_state.results[1]
+                )
+                if response.status_code == 200:
+                    st.success("Emails sent successfully! Redirecting to results...")
+                    st.session_state.ab_step = "results_ready"
+                else:
+                    st.error(f"Failed to send emails: {response.json()['detail']}")
             else:
                 st.error("No A/B test skeletons available for Subscription.")
 
@@ -217,7 +239,7 @@ if page == "Start A/B Testing":
             st.session_state.engagement_strategy = engagement_strategy
             st.session_state.context_value = context_value
 
-            ab_tests_data = fetch_data("ab_tests", filters={"goal": "engagement", "targeting" : engagement_strategy})
+            ab_tests_data = fetch_data("ab_tests", filters={"goal": "engagement", "targeting": engagement_strategy})
             if not ab_tests_data.empty:
                 results = ab_tests_data["text_skeleton"].apply(
                     lambda x: x.replace("(insert the movie here)", context_value)
@@ -225,7 +247,18 @@ if page == "Start A/B Testing":
                 )
                 st.session_state.results_ready = True
                 st.session_state.results = results.tolist()
-                st.session_state.ab_step = "results_ready"
+
+                # Trigger send-emails API call
+                response = send_emails(
+                    st.session_state.selected_segment,
+                    st.session_state.results[0],
+                    st.session_state.results[1]
+                )
+                if response.status_code == 200:
+                    st.success("Emails sent successfully! Redirecting to results...")
+                    st.session_state.ab_step = "results_ready"
+                else:
+                    st.error(f"Failed to send emails: {response.json()['detail']}")
             else:
                 st.error("No A/B test skeletons available for Engagement.")
 
@@ -237,22 +270,8 @@ if page == "Start A/B Testing":
             st.write("Here are the generated messages:")
             for result in st.session_state.results:
                 st.markdown(f"- {result}")
-
-            response = requests.post(
-                    f"{API_URL}/send-emails",
-                    json={
-                        "segment_name": st.session_state.selected_segment,
-                        "text_skeleton_1": st.session_state.results[0],
-                        "text_skeleton_2": st.session_state.results[1]     }
-                )
-            if response.status_code == 200:
-                st.success(response.json()["message"])
-            else:
-                st.error(f"Failed to send emails: {response.json()['detail']}")    
         else:
             st.write("No results available.")
-        
-        
 
         st.subheader("You will see the results in 2 minutes.")
         if st.button("View the results"):
@@ -281,9 +300,9 @@ if page == "Start A/B Testing":
             st.line_chart(data_2.set_index('X'))
 
         st.subheader("P-Value")
-        st.write("P value is ...")  
+        st.write("P value is ...")
 
         if st.button("Refresh and Start Again"):
-            reset_app()  
+            reset_app()
             st.session_state.ab_step = "select_segment"
             st.experimental_rerun()

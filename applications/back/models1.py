@@ -168,7 +168,7 @@ class ABTestResult(Base):
     - `experiment (relationship)`: Association with the `Experiment` model.
     """
     __tablename__ = "ab_test_results"
-    result_id = Column(Integer, primary_key=True, index=True)
+    result_id = Column(Integer, primary_key=True, index=True, autoincrement = True)
     ab_test_id = Column(Integer, ForeignKey("ab_tests.ab_test_id"))
     experiment_id = Column(Integer, ForeignKey("experiments.experiment_id"))
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
@@ -188,6 +188,6 @@ class Experiment(Base):
     - `ab_test_results (relationship)`: Association with the `ABTestResult` model.
     """
     __tablename__ = "experiments"
-    experiment_id = Column(Integer, primary_key=True, index=True)
+    experiment_id = Column(Integer, primary_key=True, index=True, autoincrement = True)
     p_value = Column(Float)
     ab_test_results = relationship("ABTestResult", back_populates="experiment")

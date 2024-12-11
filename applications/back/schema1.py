@@ -226,7 +226,6 @@ class ABTestResultBase(BaseSchema):
     experiment_id: int
     customer_id: int
     clicked_link: bool
-    time_spent_seconds: int
 
 class ABTestResultCreate(ABTestResultBase):
     """
@@ -235,7 +234,9 @@ class ABTestResultCreate(ABTestResultBase):
     **Inherits:**
     - `ABTestResultBase`: Contains all base attributes.
     """
-    pass
+    experiment_id: int
+    customer_id: int
+    clicked_link: bool
 
 class ABTestResult(ABTestResultBase):
     """
@@ -244,28 +245,25 @@ class ABTestResult(ABTestResultBase):
     **Attributes:**
     - `result_id (int)`: Unique identifier for the result.
     """
-    result_id: int
+    ab_test_id: int
+    experiment_id: int
+    customer_id: int
+    clicked_link: bool
+    time_spent_seconds: int
 
-# Experiment Schema
-class ExperimentBase(BaseSchema):
-    """
-    Schema for the base structure of an Experiment.
 
-    **Attributes:**
-    - `p_value (float)`: Statistical p-value representing the experiment's significance.
-    """
-    p_value: float
 
-class ExperimentCreate(ExperimentBase):
+class ExperimentCreate(BaseModel):
     """
     Schema for creating a new Experiment.
 
     **Inherits:**
     - `ExperimentBase`: Contains all base attributes.
     """
-    pass
+    p_value: float
 
-class Experiment(ExperimentBase):
+
+class Experiment(BaseModel):
     """
     Schema for representing an existing Experiment.
 
@@ -273,3 +271,4 @@ class Experiment(ExperimentBase):
     - `experiment_id (int)`: Unique identifier for the experiment.
     """
     experiment_id: int
+    p_value: float
