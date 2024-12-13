@@ -30,8 +30,13 @@ def get_db():
     as a context manager to ensure that database resources are properly 
     managed and closed after use.
 
-    Yields:
-        db (Session): An instance of a database session.
+    **Yields:**
+        db (Session): An instance of a database session that can be used 
+        for querying or modifying the database.
+        
+    **Raises:**
+        None: The function manages the session and ensures it is closed 
+        after use.
     """
     db = SessionLocal()
     try:
