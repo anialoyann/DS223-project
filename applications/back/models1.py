@@ -1,6 +1,9 @@
 from sqlalchemy import Column, Integer, String, Text, Float, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from database1 import Base
+from datetime import datetime, timezone
+
+
 
 # Segments Model
 class Segment(Base):
@@ -11,7 +14,7 @@ class Segment(Base):
     - `segment_id (int)`: Primary key, unique identifier for each segment.
     - `segment_name (str)`: Name of the customer segment.
     - `segment_description (str)`: Detailed description of the segment.
-    - `customers (relationship)`: Association with the `CustomerSegment` model for linked customers.
+    - `customers (relationship)`: Association with the `CustomerSegment` model, linking this segment to its customers.
     """
     __tablename__ = "segments"
     segment_id = Column(Integer, primary_key=True, index=True)
@@ -30,20 +33,21 @@ class Customer(Base):
     - `email (str)`: Unique email address of the customer.
     - `subscription_id (int)`: Foreign key linking to the `Subscription` model.
     - `location (str)`: Geographic location of the customer.
-    - `created_at (DateTime)`: Timestamp of when the customer was added.
-    - `updated_at (DateTime)`: Timestamp of the last update.
+    - `created_at (DateTime)`: Timestamp of when the customer was added, defaulting to the current time.
+    - `updated_at (DateTime)`: Timestamp of the last update, automatically updated on modification.
     - `segments (relationship)`: Association with the `CustomerSegment` model.
     - `engagements (relationship)`: Association with the `Engagement` model for movie interactions.
     - `ab_test_results (relationship)`: Association with the `ABTestResult` model for test results.
     """
+
     __tablename__ = "customers"
-    customer_id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     subscription_id = Column(Integer, ForeignKey("subscriptions.subscription_id"))
     location = Column(String)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.now())  
+    updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
     segments = relationship("CustomerSegment", back_populates="customer")
     engagements = relationship("Engagement", back_populates="customer")
     ab_test_results = relationship("ABTestResult", back_populates="customer")
@@ -60,6 +64,7 @@ class CustomerSegment(Base):
     - `customer (relationship)`: Association with the `Customer` model.
     - `segment (relationship)`: Association with the `Segment` model.
     """
+
     __tablename__ = "customer_segments"
     customer_segment_id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
@@ -75,11 +80,12 @@ class Movie(Base):
     **Attributes:**
     - `movie_id (int)`: Primary key, unique identifier for each movie.
     - `movie_name (str)`: Name of the movie.
-    - `movie_rating (float)`: Rating of the movie, typically out of 10.
-    - `movie_duration (int)`: Duration of the movie in minutes.
-    - `movie_genre (str)`: Genre or category of the movie.
-    - `release_year (int)`: Year the movie was released.
+    - `movie_rating (float)`: Rating of the movie, typically out of 10 (may be NULL).
+    - `movie_duration (int)`: Duration of the movie in minutes (may be NULL).
+    - `movie_genre (str)`: Genre or category of the movie (may be NULL).
+    - `release_year (int)`: Year the movie was released (may be NULL).
     """
+
     __tablename__ = "movies"
     movie_id = Column(Integer, primary_key=True, index=True)
     movie_name = Column(String, nullable=False)
@@ -103,6 +109,7 @@ class Engagement(Base):
     - `customer (relationship)`: Association with the `Customer` model.
     - `movie (relationship)`: Association with the `Movie` model.
     """
+
     __tablename__ = "engagements"
     engagement_id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
@@ -139,8 +146,9 @@ class ABTest(Base):
     - `targeting (str)`: Focus of the test ('genre', 'movie', or 'package').
     - `test_variant (int)`: Identifier for the test variant (A or B).
     - `text_skeleton (str)`: Template text used in the test.
-    - `results (relationship)`: Association with the `ABTestResult` model.
+    - `results (relationship)`: Association with the `ABTestResult` model, linking this test to its results.
     """
+
     __tablename__ = "ab_tests"
     ab_test_id = Column(Integer, primary_key=True, index=True)
     goal = Column(String, nullable=False)  # 'Engagement' or 'Subscription'
@@ -164,8 +172,9 @@ class ABTestResult(Base):
     - `customer (relationship)`: Association with the `Customer` model.
     - `experiment (relationship)`: Association with the `Experiment` model.
     """
+
     __tablename__ = "ab_test_results"
-    result_id = Column(Integer, primary_key=True, index=True)
+    result_id = Column(Integer, primary_key=True, index=True, autoincrement = True)
     ab_test_id = Column(Integer, ForeignKey("ab_tests.ab_test_id"))
     experiment_id = Column(Integer, ForeignKey("experiments.experiment_id"))
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
@@ -185,6 +194,6 @@ class Experiment(Base):
     - `ab_test_results (relationship)`: Association with the `ABTestResult` model.
     """
     __tablename__ = "experiments"
-    experiment_id = Column(Integer, primary_key=True, index=True)
+    experiment_id = Column(Integer, primary_key=True, index=True, autoincrement = True)
     p_value = Column(Float)
     ab_test_results = relationship("ABTestResult", back_populates="experiment")
