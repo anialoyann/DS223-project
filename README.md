@@ -13,7 +13,7 @@ Before getting started, ensure you have the following prerequisites installed:
    git clone https://github.com/anialoyann/DS223-project.git
    ```
 
-2. Build and start the Docker containers:
+2. Build and start the Docker containers (inside a virtual environment, of course):
    ```bash
    docker-compose up --build
    ```
@@ -23,7 +23,7 @@ Before getting started, ensure you have the following prerequisites installed:
 After running `docker-compose up --build`, you can access each component of the application at the following URLs:
 
 - **Streamlit Frontend**: [http://localhost:8501](http://localhost:8501)  
-  The main interface for managing customers, built with Streamlit. Use this to add customers, see the Dashboard and run the A/B Test to sent the emails and see the results.
+  The main interface for managing customers, built with Streamlit. Use this to add customers, see the Dashboard and run the A/B Test to send the emails and see the results.
 
 - **FastAPI Backend**: [http://localhost:8000](http://localhost:8000)  
   The backend API where requests are processed. You can use tools like [Swagger UI](http://localhost:8000/docs) (provided by FastAPI) to explore the API endpoints and their details.
@@ -36,8 +36,6 @@ After running `docker-compose up --build`, you can access each component of the 
 
 > Note: Ensure Docker is running, and all environment variables in `.env` are correctly configured before accessing these URLs.
 
-## Project structure
-
 ## Project Structure
 
 Here’s an overview of the project’s file structure:
@@ -45,6 +43,7 @@ Here’s an overview of the project’s file structure:
 ```bash
 ├── LICENSE
 ├── README.md
+├── mkdocs.yml
 ├── applications
 │   ├── .env                 # Environment variables for the entire application
 │   ├── app                  # Streamlit frontend folder
@@ -61,22 +60,21 @@ Here’s an overview of the project’s file structure:
 │   │   ├── models1.py       # SQLAlchemy models for database tables
 │   │   ├── schema1.py       # Pydantic schemas for request and response validation
 │   │   └── requirements.txt # Backend dependencies
-│   ├── ds                   # Data Science folder
+│   ├── ds                   # Data Scientist's folder
 │   │   ├── __init__.py
-│   │   ├── ab_testing.py
-│   │   ├── Dockerfile
-│   │   ├── ds_model.py
-│   │   ├── requirements.txt
-│   │   └── test.ipynb
+│   │   ├── ab_testing.py    # Model for A/B Testing
+│   │   ├── Dockerfile       # Dockerfile for the DS container
+│   │   ├── ds_model.py      # Model for customer segmentation
+│   │   ├── requirements.txt # Requirements for DS
+│   │   └── test.ipynb       # Notebook for executing the models
 │   ├── etl                  # ETL process folder
 │   │   ├── data             # Data folder for ETL inputs
-│   │   ├── data_generator.py
-│   │   ├── database.py
-│   │   ├── db_utils.py
-│   │   ├── Dockerfile
-│   │   ├── etl.py
-│   │   ├── example.py
-│   │   ├── models.py
+│   │   ├── data_generator.py # Code function generating fake data using database structure
+│   │   ├── database.py      # Database configuration and connection
+│   │   ├── db_utils.py      # Useful functio for DB (just in case)
+│   │   ├── Dockerfile       # Dockerfile for  container
+│   │   ├── etl.py           # Python code for creating the data tables and uploading them into the DB
+│   │   ├── models.py        # SQLAlchemy models for database tables
 │   │   └── requirements.txt
 └── docs                     # Documentation assets
     ├── etl.md               # Describes the ETL process
@@ -89,17 +87,17 @@ Here’s an overview of the project’s file structure:
 
 ## Docker 
 
-This repository sets up a Docker environment with three main services:
+This repository sets up a Docker environment with five main services:
 
 1. **PostgreSQL:** for data storage
 2. **pgAdmin:** for database management and visualization
-3. **ETL:** service for Extract, Transform, Load operations using Python
+3. **ETL:** service for Extract, Transform, Load (ETL) operations using Python
 4. **API:** service for succcessfully connecting endpoints and performing CRUD operations
 5. **APP** service for UI
 
 ## Prerequisites
 
-Before running this setup, ensure Docker and Docker Compose are installed on your system.
+Before running this setup, ensure Docker and Docker Compose are installed on your system, and docker is running.
 
 
 - Docker: [Install Docker](https://docs.docker.com/get-docker/)
@@ -116,7 +114,7 @@ Before running this setup, ensure Docker and Docker Compose are installed on you
 
 ### Environment Variables
 
-Create a `.env` file in the root directory to define your environment variables as below:
+Make sure to have a `.env` file in the root directory to define your environment variables as below:
 
 ```env
 # PostgreSQL configuration
@@ -135,26 +133,26 @@ PGADMIN_PASSWORD=<your_pgadmin_password>
 
 ### Schema Design
 
-We will try to create below schema:
+We will try to create the below schema:
 
 ![Star Schema](docs/imgs/erd.png)
 
 ### ETL
 
-In `models.py`, we have used `sqlalchemy` package, which allows map python objects with SQL objects.
+In `models.py`, we have used the `sqlalchemy` package, which allows to map python objects with SQL objects.
 
-By running `etl.py` following objects will be created:
+By running `etl.py` the following objects will be created:
     - sql tables 
-    - the data sets will store in `data\` folder
+    - the data sets will store in the `data\` folder
     - the csv files will be loaded into DB
 
 # A/B Testing and Customer Segmentation
 
-This project implements **A/B Testing** and **Customer Segmentation** to analyze user behavior and optimize campaigns. The workflow includes deriving customer engagement statistics based on which the segmentation can be calculated for each customer, performing A/B tests, and using statistical analysis to interpret the results.
+This project implements **A/B Testing** and **Customer Segmentation** to analyze user behavior and optimize campaigns. The workflow includes deriving customer engagement statistics based on which the segmentation can be calculated for each customer, performing A/B tests (by sending out emails to users), and using statistical analysis to interpret the results.
 
 ## Customer Segmentation (`ds_model.py`)
 
-The **Customer Segmentation** script segments customers into different groups based on various. Customers are assigned to different segments based on a scoring system, which helps in targeting the right group for specific campaigns.
+The **Customer Segmentation** script segments customers into different groups based on various metrics. Customers are assigned to different segments based on a scoring system, which helps in targeting the right group for specific campaigns.
 
 - **Process**:
   - Aggregates engagement metrics like session frequency, total watch duration, and engagement actions (liked, disliked, etc.).
@@ -236,12 +234,9 @@ In this example:
 
 ## Web Application
 
-Adding another service named `app`, which is going to be responsible for the **front-end**.
-
+We have another service named `app`, which is going to be responsible for the **front-end**.
 
 To Open the web app visit: [here](http://localhost:8501/) 
-
-## Web Application
 
 The **Streamlit Front-End** application provides an interactive user interface that allows users to manage customer data, run A/B tests, and view results. The app is integrated with the **FastAPI Backend** to perform operations such as sending personalized emails, managing customer segments, and tracking customer engagement. The following features are available:
 
@@ -279,7 +274,7 @@ The **Streamlit Front-End** application provides an interactive user interface t
    - Segments are used for targeted email campaigns.
 
 **View A/B Test Results:**
-   - Displays the results of the A/B tests, including metrics like click-through rates (CTR).
+   - Displays the results of the A/B tests.
    - Results are presented graphically, allowing users to analyze the performance of different campaigns.
 
    ![A/B Testing Results](docs/imgs/app_results.png)  
@@ -305,63 +300,6 @@ The **Streamlit Front-End** application provides an interactive user interface t
 **View Results:**
    - Check **A/B test results** with visual charts and detailed metrics.
 
-### Dockerfile
+The end.
 
-```Dockerfile
-# Dockerfile
-
-# pull the official docker image
-FROM python:3.10-slim-bullseye
-
-RUN apt-get update && apt-get install -y \
-    build-essential libpq-dev libfreetype6-dev libpng-dev libjpeg-dev \
-    libblas-dev liblapack-dev gfortran \
-    && rm -rf /var/lib/apt/lists/*
-
-# set work directory
-WORKDIR /app
-
-
-# Copy the requirements file and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the contents of the front directory to /app in the container
-COPY . .
-
-# Expose Streamlit's default port
-EXPOSE 8501
-
-# Run the Streamlit application
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.headless=true", "--server.runOnSave=true"]
-```
-
-### Service
-
-```yaml
-  app:
-    container_name: streamlit_app
-    build:
-      context: ./app
-      dockerfile: Dockerfile
-    ports:
-      - 8501:8501
-    environment:
-      - API_URL=http://api:8000
-    depends_on:
-      - api
-```
-## Mkdocs
-Mkdocs it documents your code and puts it in web format.
-
-### Prerequisites
-- `pip install mkdocs-material`
-- `pip install 'mkdocstrings[python]'`
-
-### How to use
-
-
-1. Create `docs` folder
-2. Create respective `.md ` files with proper links
-3. `mkdocs new .` to create mkdocs.yaml and folder docs that has `index.md` and folder
-4. To show your documentation type `mkdocs serve` and click on the browser connection to open it in your browser.
+Note: For more enjoyable content, do something else instead of reading README files (despite the name).

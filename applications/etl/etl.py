@@ -146,6 +146,7 @@ def load_csv_to_table(table_name, csv_path):
     Load data from a CSV file into a database table.
 
     **Parameters:**
+    
         - `table_name (str)`: The name of the database table.
         - `csv_path (str)`: The path to the CSV file containing data.
 
