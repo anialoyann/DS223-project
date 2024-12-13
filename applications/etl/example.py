@@ -31,7 +31,12 @@ movie_data = {
     }
 
 def main():
-    # Insert a new movie
+    """
+    The main function to insert data into the movies table and export the data into a DataFrame.
+    
+    - It calls `insert_row` to insert the specified movie data into the 'movies' table.
+    - It calls `export_to_dataframe` to export the movies table to a Pandas DataFrame and prints it.
+    """
     print("Inserting movie data...")
     insert_row(movies_table, movie_data)
     

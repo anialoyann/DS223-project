@@ -53,16 +53,16 @@ def insert_row(table, data, retries=5, delay=1):
     for a specified number of attempts. This function is ideal for scenarios
     involving race conditions in database writes.
 
-    Args:
+    **Args:**
         table (sqlalchemy.Table): SQLAlchemy table object where the row will be inserted.
         data (dict): Dictionary mapping column names to values for the new row.
         retries (int, optional): Number of retry attempts in case of a conflict. Defaults to 5.
         delay (int, optional): Delay in seconds between retry attempts. Defaults to 1.
 
-    Raises:
+    **Raises:**
         SQLAlchemyError: If an error other than a unique constraint violation occurs.
 
-    Example:
+    **Example:**
         insert_row(table=CustomerTable, data={"id": 1, "name": "John Doe"})
     """
     session = Session()
@@ -94,14 +94,14 @@ def delete_row(table, conditions):
 
     Enables efficient row deletion using SQLAlchemy, with conditions passed as a dictionary of column-value pairs.
 
-    Args:
+    **Args:**
         table (sqlalchemy.Table): SQLAlchemy table object from which rows will be deleted.
         conditions (dict): Dictionary of column-value pairs to filter rows for deletion.
 
-    Raises:
+    **Raises:**
         SQLAlchemyError: If an error occurs during the deletion process.
 
-    Example:
+    **Example:**
         delete_row(table=CustomerTable, conditions={"id": 1, "name": "John Doe"})
     """
     session = Session()
@@ -124,16 +124,16 @@ def export_to_dataframe(table):
 
     Useful for integrating database data with Python's data analysis ecosystem. The function handles the conversion of SQLAlchemy query results to a Pandas DataFrame seamlessly.
 
-    Args:
+    **Args:**
         table (sqlalchemy.Table): SQLAlchemy table object to export data from.
 
-    Returns:
+    **Returns:**
         pd.DataFrame: A Pandas DataFrame containing the table's data.
 
-    Raises:
+    **Raises:**
         SQLAlchemyError: If an error occurs during data export.
 
-    Example:
+    **Example:**
         df = export_to_dataframe(table=CustomerTable)
     """
     session = Session()

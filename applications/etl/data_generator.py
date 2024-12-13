@@ -48,13 +48,13 @@ def generate_movie(movie_id):
     """
     Retrieve a predefined movie from the list based on its ID.
 
-    Args:
+    **Args:**
         movie_id (int): The ID of the movie to retrieve.
 
-    Returns:
+    **Returns:**
         dict: A dictionary containing movie details.
 
-    Raises:
+    **Raises:**
         ValueError: If the movie_id is invalid.
     """
     if 1 <= movie_id <= len(real_films):
@@ -66,13 +66,13 @@ def generate_subscription(subscription_id):
     """
     Retrieve a predefined subscription plan based on its ID.
 
-    Args:
+    **Args:**
         subscription_id (int): The ID of the subscription to retrieve.
 
-    Returns:
+    **Returns:**
         dict: A dictionary containing subscription details.
 
-    Raises:
+    **Raises:**
         ValueError: If the subscription_id is invalid.
     """
     predefined_subscriptions = [
@@ -91,13 +91,13 @@ def generate_segment(segment_id):
     """
     Retrieve a predefined customer segment based on its ID.
 
-    Args:
+    **Args:**
         segment_id (int): The ID of the segment to retrieve.
 
-    Returns:
+    **Returns:**
         dict: A dictionary containing segment details.
 
-    Raises:
+    **Raises:**
         ValueError: If the segment_id is invalid.
     """
     predefined_segments = [
@@ -120,21 +120,19 @@ def generate_segment(segment_id):
     else:
         raise ValueError("Invalid subscription_id: no predefined subscription exists with this ID.")
     
-def generate_customer(customer_id, subscription_id):
+def generate_customer(subscription_id):
     """
     Generate a mock customer record.
 
-    Args:
-        customer_id (int): The unique ID of the customer.
+    **Args:**
         subscription_id (int): The subscription ID associated with the customer.
 
-    Returns:
+    **Returns:**
         dict: A dictionary containing customer details.
     """
     created_at = fake.date_time_this_decade()
     updated_at = fake.date_time_between(start_date=created_at, end_date="now")
     return {
-        "customer_id": customer_id,
         "name": fake.name(),
         "email": fake.email(),
         "subscription_id": subscription_id,
@@ -143,20 +141,18 @@ def generate_customer(customer_id, subscription_id):
         "updated_at": updated_at,
     }
 
-def generate_engagement(engagement_id, customer_id, movie_id):
+def generate_engagement(customer_id, movie_id):
     """
     Generate a mock engagement record between a customer and a movie.
 
-    Args:
-        engagement_id (int): The unique ID of the engagement.
+    **Args:**
         customer_id (int): The customer involved in the engagement.
         movie_id (int): The movie involved in the engagement.
 
-    Returns:
+    **Returns:**
         dict: A dictionary containing engagement details.
     """
     return {
-        "engagement_id": engagement_id,
         "customer_id": customer_id,
         "movie_id": movie_id,
         "session_date": fake.date_this_year(),
@@ -170,13 +166,13 @@ def generate_ab_test(ab_test_id):
     """
     Retrieve a predefined A/B test configuration based on its ID.
 
-    Args:
+    **Args:**
         ab_test_id (int): The ID of the A/B test to retrieve.
 
-    Returns:
+    **Returns:**
         dict: A dictionary containing A/B test details.
 
-    Raises:
+    **Raises:**
         ValueError: If the ab_test_id is invalid.
     """
     predefined_types = [
