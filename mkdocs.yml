@@ -7,6 +7,8 @@ nav:
   - "💡 ETL Process": etl.md
   - "🌐 API Overview": api.md
   - "📱 Application": app.md
+  - "🔍 DS": ds.md
+
   # - "🔍 API Models": api_models.md
 
 theme:
