@@ -1,0 +1,1487 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A comprehensive documentation of how the code should be utilized.">
+      
+      
+        <meta name="author" content="Your Name">
+      
+      
+      
+        <link rel="prev" href="../app/">
+      
+      
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>🔍 DS - Documentation for the A/B Testing Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="mint">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#customer-statistics-and-segmentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Documentation for the A/B Testing Project" class="md-header__button md-logo" aria-label="Documentation for the A/B Testing Project" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation for the A/B Testing Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🔍 DS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="mint"  aria-label="Toggle dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Toggle dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="lavender" data-md-color-accent="peach"  aria-label="Toggle light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Toggle light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  🏠 Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../etl/" class="md-tabs__link">
+        
+  
+    
+  
+  💡 ETL Process
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+    
+  
+  🌐 API Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../app/" class="md-tabs__link">
+        
+  
+    
+  
+  📱 Application
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  🔍 DS
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentation for the A/B Testing Project" class="md-nav__button md-logo" aria-label="Documentation for the A/B Testing Project" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Documentation for the A/B Testing Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🏠 Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../etl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    💡 ETL Process
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🌐 API Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📱 Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    🔍 DS
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    🔍 DS
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#customer-statistics-and-segmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customer Statistics and Segmentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.ds.ds_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      ds_model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.ds.ds_model.calculate_customer_segments" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_customer_segments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.ds.ds_model.compute_customer_statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_customer_statistics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.ds.ds_model.delete_customer_segments_table" class="md-nav__link">
+    <span class="md-ellipsis">
+      delete_customer_segments_table
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="delete_customer_segments_table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ab-tetsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      A/B tetsing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.ds.ab_testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      ab_testing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.ds.ab_testing.conduct_ab_test" class="md-nav__link">
+    <span class="md-ellipsis">
+      conduct_ab_test
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>🔍 DS</h1>
+
+<h3 id="customer-statistics-and-segmentation">Customer Statistics and Segmentation</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.ds.ds_model"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.ds.ds_model.calculate_customer_segments" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">calculate_customer_segments</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Calculate customer segments based on a scoring system using adjusted thresholds.
+Automatically assigns customers with no engagement data to segment ID 1 (Lost Cause).</p>
+<p>This function:
+- Fetches customer, engagement, and subscription data from the database.
+- Aggregates the engagement data for each customer.
+- Assigns a recency score based on the time since the customer's last engagement.
+- Scores each customer based on frequency, session duration, monetary value (subscription price), 
+  likes, and dislikes.
+- Segments customers into categories such as 'Lost Cause', 'Vulnerable Customers', 'Free Riders', and 'Star Customers'.
+- Updates the <code>customer_segments</code> table with the new segment assignments.</p>
+<p><strong>Returns:</strong>
+- <code>final_table (DataFrame)</code>: The final <code>customer_segments</code> table with customer IDs, segment IDs, and customer segment IDs.</p>
+<p><strong>Raises:</strong>
+- Prints warnings if engagement data is missing or any customers have no interactions with the system.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/ds/ds_model.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">calculate_customer_segments</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate customer segments based on a scoring system using adjusted thresholds.</span>
+<span class="sd">    Automatically assigns customers with no engagement data to segment ID 1 (Lost Cause).</span>
+
+<span class="sd">    This function:</span>
+<span class="sd">    - Fetches customer, engagement, and subscription data from the database.</span>
+<span class="sd">    - Aggregates the engagement data for each customer.</span>
+<span class="sd">    - Assigns a recency score based on the time since the customer&#39;s last engagement.</span>
+<span class="sd">    - Scores each customer based on frequency, session duration, monetary value (subscription price), </span>
+<span class="sd">      likes, and dislikes.</span>
+<span class="sd">    - Segments customers into categories such as &#39;Lost Cause&#39;, &#39;Vulnerable Customers&#39;, &#39;Free Riders&#39;, and &#39;Star Customers&#39;.</span>
+<span class="sd">    - Updates the `customer_segments` table with the new segment assignments.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">    - `final_table (DataFrame)`: The final `customer_segments` table with customer IDs, segment IDs, and customer segment IDs.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">    - Prints warnings if engagement data is missing or any customers have no interactions with the system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Database connection URL</span>
+    <span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="s2">&quot;postgresql+psycopg2://postgres:password@localhost:5432/ds223_gp_db&quot;</span>
+    <span class="n">delete_customer_segments_table</span><span class="p">()</span>
+    <span class="c1"># Create the engine</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="c1"># Query necessary columns</span>
+        <span class="n">customers_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+            <span class="s2">&quot;SELECT customer_id, created_at, updated_at, subscription_id FROM customers&quot;</span><span class="p">,</span> 
+            <span class="n">con</span><span class="o">=</span><span class="n">connection</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of customers currently: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">customers_df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">engagements_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+            <span class="s2">&quot;SELECT customer_id, engagement_id, session_date, session_duration, watched_fully, like_status FROM engagements&quot;</span><span class="p">,</span> 
+            <span class="n">con</span><span class="o">=</span><span class="n">connection</span>
+        <span class="p">)</span>
+        <span class="n">subscriptions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            SELECT </span>
+<span class="sd">                subscriptions.subscription_id, </span>
+<span class="sd">                subscriptions.price, </span>
+<span class="sd">                customers.customer_id </span>
+<span class="sd">            FROM subscriptions</span>
+<span class="sd">            JOIN customers </span>
+<span class="sd">                ON subscriptions.subscription_id = customers.subscription_id</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="p">,</span> 
+            <span class="n">con</span><span class="o">=</span><span class="n">connection</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Aggregating metrics per customer_id</span>
+        <span class="n">engagements_agg</span> <span class="o">=</span> <span class="n">engagements_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+            <span class="n">frequency</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;engagement_id&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+            <span class="n">total_duration</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;session_duration&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+            <span class="n">watched_fully_true</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;watched_fully&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">watched_fully_false</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;watched_fully&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">liked_count</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;like_status&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;Liked&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">disliked_count</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;like_status&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;Disliked&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">last_session_date</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;session_date&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">)</span>  <span class="c1"># Latest session date</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="c1"># Calculate recency (days since last session)</span>
+        <span class="n">current_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;recency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_date</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;last_session_date&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+
+        <span class="c1"># Join with subscription data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">engagements_agg</span><span class="p">,</span> <span class="n">customers_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">subscriptions_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;monetary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>  <span class="c1"># Use subscription price as monetary value</span>
+
+        <span class="c1"># Fill missing engagement data for customers without engagements</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;total_duration&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;watched_fully_true&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;watched_fully_false&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;liked_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;disliked_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;last_session_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">current_date</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;recency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">9999</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Assign a high recency value for customers without sessions</span>
+
+        <span class="c1"># Define scoring functions</span>
+        <span class="k">def</span> <span class="nf">score_frequency</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">5</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">8</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">10</span>
+
+        <span class="k">def</span> <span class="nf">score_duration</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">600</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">900</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">5</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">1500</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">8</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">10</span>
+
+        <span class="k">def</span> <span class="nf">score_monetary</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">7</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">10</span>
+
+        <span class="k">def</span> <span class="nf">score_liked_count</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">5</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">8</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">10</span>
+
+        <span class="k">def</span> <span class="nf">score_disliked_count</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">10</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">7</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">5</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">2</span>
+
+        <span class="c1"># Apply scoring</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_frequency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">score_frequency</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;total_duration&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">score_duration</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_monetary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;monetary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">score_monetary</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_liked_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;liked_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">score_liked_count</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_disliked_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;disliked_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">score_disliked_count</span><span class="p">)</span>
+
+        <span class="c1"># Calculate total score</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;total_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_frequency&#39;</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_duration&#39;</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_monetary&#39;</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_liked_count&#39;</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;score_disliked_count&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Assign segments based on total score</span>
+        <span class="k">def</span> <span class="nf">assign_segment</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">has_engagements</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">has_engagements</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Lost Cause</span>
+            <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Lost Cause</span>
+            <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">25</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">2</span>  <span class="c1"># Vulnerable Customers</span>
+            <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">3</span>  <span class="c1"># Free Riders</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">4</span>  <span class="c1"># Star Customers</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;has_engagements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;segment_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">assign_segment</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;total_score&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;has_engagements&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Generate sequential customer_segment_id starting from 1</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;customer_segment_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Prepare data for insertion into customer_segments table</span>
+        <span class="n">customer_segments_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;customer_segment_id&#39;</span><span class="p">,</span> <span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;segment_id&#39;</span><span class="p">]]</span>
+
+        <span class="c1"># Perform deletion and insertion</span>
+        <span class="n">customer_ids</span> <span class="o">=</span> <span class="n">customer_segments_data</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="n">text</span><span class="p">(</span><span class="s2">&quot;DELETE FROM customer_segments WHERE customer_id = ANY(:customer_ids)&quot;</span><span class="p">),</span>
+            <span class="p">{</span><span class="s1">&#39;customer_ids&#39;</span><span class="p">:</span> <span class="n">customer_ids</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">customer_segments_data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;customer_segments&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Return the final customer_segments table</span>
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">final_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM customer_segments&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">connection</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">final_table</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.ds.ds_model.compute_customer_statistics" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compute_customer_statistics</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compute and return summary statistics for key engagement and subscription metrics.</p>
+<p>This function:
+- Fetches engagement and subscription data from the database.
+- Aggregates engagement data for each customer.
+- Computes summary statistics for various metrics including frequency, session duration, likes, dislikes, and monetary value.</p>
+<p><strong>Returns:</strong>
+- <code>stats (dict)</code>: A dictionary containing summary statistics for the engagement and subscription metrics.</p>
+<p><strong>Raises:</strong>
+- Prints any errors related to missing or invalid data during the aggregation process.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/ds/ds_model.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_customer_statistics</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and return summary statistics for key engagement and subscription metrics.</span>
+
+<span class="sd">    This function:</span>
+<span class="sd">    - Fetches engagement and subscription data from the database.</span>
+<span class="sd">    - Aggregates engagement data for each customer.</span>
+<span class="sd">    - Computes summary statistics for various metrics including frequency, session duration, likes, dislikes, and monetary value.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">    - `stats (dict)`: A dictionary containing summary statistics for the engagement and subscription metrics.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">    - Prints any errors related to missing or invalid data during the aggregation process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create the engine</span>
+
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="c1"># Query necessary columns</span>
+        <span class="n">engagements_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+            <span class="s2">&quot;SELECT customer_id, engagement_id, session_duration, watched_fully, like_status FROM engagements&quot;</span><span class="p">,</span> 
+            <span class="n">con</span><span class="o">=</span><span class="n">connection</span>
+        <span class="p">)</span>
+        <span class="n">subscriptions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            SELECT </span>
+<span class="sd">                subscriptions.subscription_id, </span>
+<span class="sd">                subscriptions.price, </span>
+<span class="sd">                customers.customer_id </span>
+<span class="sd">            FROM subscriptions</span>
+<span class="sd">            JOIN customers </span>
+<span class="sd">                ON subscriptions.subscription_id = customers.subscription_id</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="p">,</span> 
+            <span class="n">con</span><span class="o">=</span><span class="n">connection</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Aggregating metrics per customer_id</span>
+        <span class="n">engagements_agg</span> <span class="o">=</span> <span class="n">engagements_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+            <span class="n">frequency</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;engagement_id&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+            <span class="n">total_duration</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;session_duration&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+            <span class="n">watched_fully_true</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;watched_fully&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">watched_fully_false</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;watched_fully&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">liked_count</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;like_status&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;Liked&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">no_action_count</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;like_status&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;No Action&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+            <span class="n">disliked_count</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;like_status&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;Disliked&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="c1"># Join with subscription data for monetary calculation</span>
+        <span class="n">engagements_agg</span> <span class="o">=</span> <span class="n">engagements_agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">subscriptions_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+        <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;monetary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Calculate summary statistics for key columns</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;total_duration&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;total_duration&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;monetary&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;monetary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;watched_fully_true&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;watched_fully_true&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;watched_fully_false&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;watched_fully_false&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;liked_count&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;liked_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;disliked_count&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;disliked_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span>
+            <span class="s1">&#39;no_action_count&#39;</span><span class="p">:</span> <span class="n">engagements_agg</span><span class="p">[</span><span class="s1">&#39;no_action_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Print statistics for inspection</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Customer Metrics Summary Statistics:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Statistics for </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">stats</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.ds.ds_model.delete_customer_segments_table" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">delete_customer_segments_table</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Deletes all contents of the customer_segments table and commits the transaction.</p>
+<p>This function:
+- Establishes a connection to the database.
+- Deletes all rows in the <code>customer_segments</code> table to reset it before inserting new data.</p>
+<p><strong>Raises:</strong>
+- Prints a confirmation message once the rows are deleted successfully.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/ds/ds_model.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">delete_customer_segments_table</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes all contents of the customer_segments table and commits the transaction.</span>
+
+<span class="sd">    This function:</span>
+<span class="sd">    - Establishes a connection to the database.</span>
+<span class="sd">    - Deletes all rows in the `customer_segments` table to reset it before inserting new data.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">    - Prints a confirmation message once the rows are deleted successfully.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create the engine</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+
+    <span class="c1"># Connect to the database and delete table contents</span>
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>  <span class="c1"># Automatically handles commit/rollback</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;DELETE FROM customer_segments;&quot;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deleted all rows from the customer_segments table.&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="ab-tetsing">A/B tetsing</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.ds.ab_testing"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.ds.ab_testing.conduct_ab_test" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">conduct_ab_test</span><span class="p">(</span><span class="n">experiment_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Conduct an A/B test based on the experiment_id.</p>
+<p>This function fetches the A/B test results for a given experiment from the database,
+calculates click-through rates for two test groups, and performs a chi-square test to
+determine whether there is a statistically significant difference in performance between the groups.
+It then updates the <code>experiments</code> table with the p-value of the test.</p>
+<p><strong>Parameters:</strong>
+- <code>experiment_id (int)</code>: The ID of the experiment to conduct the A/B test on.</p>
+<p><strong>Returns:</strong>
+- <code>p_value (float)</code>: The p-value resulting from the chi-square test, indicating the statistical significance.</p>
+<p><strong>Raises:</strong>
+- Prints messages indicating various errors such as insufficient data, invalid A/B test setup, or invalid chi-square test.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/ds/ab_testing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span>
+<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">conduct_ab_test</span><span class="p">(</span><span class="n">experiment_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Conduct an A/B test based on the experiment_id.</span>
+
+<span class="sd">    This function fetches the A/B test results for a given experiment from the database,</span>
+<span class="sd">    calculates click-through rates for two test groups, and performs a chi-square test to</span>
+<span class="sd">    determine whether there is a statistically significant difference in performance between the groups.</span>
+<span class="sd">    It then updates the `experiments` table with the p-value of the test.</span>
+
+<span class="sd">    **Parameters:**</span>
+<span class="sd">    - `experiment_id (int)`: The ID of the experiment to conduct the A/B test on.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">    - `p_value (float)`: The p-value resulting from the chi-square test, indicating the statistical significance.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">    - Prints messages indicating various errors such as insufficient data, invalid A/B test setup, or invalid chi-square test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fetch A/B test results filtered by experiment_id</span>
+    <span class="n">ab_test_results_query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT *</span>
+<span class="s2">    FROM ab_test_results</span>
+<span class="s2">    WHERE experiment_id = </span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">ab_test_results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">ab_test_results_query</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ab_test_results_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No results found for experiment_id: </span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">ab_test_ids</span> <span class="o">=</span> <span class="n">ab_test_results_df</span><span class="p">[</span><span class="s1">&#39;ab_test_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ab_test_ids</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A/B test requires exactly two test variants. Invalid data.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">group_1</span> <span class="o">=</span> <span class="n">ab_test_results_df</span><span class="p">[</span><span class="n">ab_test_results_df</span><span class="p">[</span><span class="s1">&#39;ab_test_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ab_test_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">group_2</span> <span class="o">=</span> <span class="n">ab_test_results_df</span><span class="p">[</span><span class="n">ab_test_results_df</span><span class="p">[</span><span class="s1">&#39;ab_test_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ab_test_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="c1"># Calculate click counts for each group</span>
+    <span class="n">group_1_clicks</span> <span class="o">=</span> <span class="n">group_1</span><span class="p">[</span><span class="s1">&#39;clicked_link&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">group_2_clicks</span> <span class="o">=</span> <span class="n">group_2</span><span class="p">[</span><span class="s1">&#39;clicked_link&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># Calculate total exposures (rows in each group)</span>
+    <span class="n">group_1_total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group_1</span><span class="p">)</span>
+    <span class="n">group_2_total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group_2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">group_1_total</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">group_2_total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Insufficient data in one of the groups. A/B testing cannot proceed.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Prepare contingency table for chi-square test</span>
+    <span class="n">contingency_table</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="n">group_1_clicks</span><span class="p">,</span> <span class="n">group_1_total</span> <span class="o">-</span> <span class="n">group_1_clicks</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">group_2_clicks</span><span class="p">,</span> <span class="n">group_2_total</span> <span class="o">-</span> <span class="n">group_2_clicks</span><span class="p">]</span>
+    <span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contingency Table&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">contingency_table</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">row</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The contingency table contains zero frequencies, which makes the chi-square test invalid.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">)</span>
+
+    <span class="c1"># Update the experiments table with the p-value</span>
+    <span class="n">update_query</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        UPDATE experiments</span>
+<span class="s2">        SET p_value = :p_value</span>
+<span class="s2">        WHERE experiment_id = :experiment_id;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>  <span class="c1"># Start a transaction</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">update_query</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;p_value&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span> <span class="s2">&quot;experiment_id&quot;</span><span class="p">:</span> <span class="n">experiment_id</span><span class="p">})</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experiment ID: </span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group 1 Click Rate: </span><span class="si">{</span><span class="n">group_1_clicks</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">group_1_total</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group 2 Click Rate: </span><span class="si">{</span><span class="n">group_2_clicks</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">group_2_total</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chi-Square Test p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result: Statistically significant difference. One group performs better.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result: No statistically significant difference between the groups.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">p_value</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "navigation.smooth", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

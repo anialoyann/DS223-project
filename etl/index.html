@@ -1,0 +1,3121 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A comprehensive documentation of how the code should be utilized.">
+      
+      
+        <meta name="author" content="Your Name">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../api/">
+      
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>💡 ETL Process - Documentation for the A/B Testing Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="mint">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#etl" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Documentation for the A/B Testing Project" class="md-header__button md-logo" aria-label="Documentation for the A/B Testing Project" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation for the A/B Testing Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              💡 ETL Process
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="mint"  aria-label="Toggle dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Toggle dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="lavender" data-md-color-accent="peach"  aria-label="Toggle light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Toggle light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  🏠 Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  💡 ETL Process
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+    
+  
+  🌐 API Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../app/" class="md-tabs__link">
+        
+  
+    
+  
+  📱 Application
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ds/" class="md-tabs__link">
+        
+  
+    
+  
+  🔍 DS
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentation for the A/B Testing Project" class="md-nav__button md-logo" aria-label="Documentation for the A/B Testing Project" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Documentation for the A/B Testing Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🏠 Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    💡 ETL Process
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    💡 ETL Process
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etl" class="md-nav__link">
+    <span class="md-ellipsis">
+      ETL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ETL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Connection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.database" class="md-nav__link">
+    <span class="md-ellipsis">
+      database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.database.get_db" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_db
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_db">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#models-and-data-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models and Data Generation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models" class="md-nav__link">
+    <span class="md-ellipsis">
+      models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.ABTest" class="md-nav__link">
+    <span class="md-ellipsis">
+      ABTest
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.ABTest_Result" class="md-nav__link">
+    <span class="md-ellipsis">
+      ABTest_Result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.Customer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.CustomerSegment" class="md-nav__link">
+    <span class="md-ellipsis">
+      CustomerSegment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.Engagement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Engagement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.Experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.Movie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Movie
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.Segment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Segment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.models.Subscription" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subscription
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator" class="md-nav__link">
+    <span class="md-ellipsis">
+      data_generator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator.generate_ab_test" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_ab_test
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator.generate_customer" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_customer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator.generate_engagement" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_engagement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator.generate_movie" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_movie
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator.generate_segment" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_segment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.data_generator.generate_subscription" class="md-nav__link">
+    <span class="md-ellipsis">
+      generate_subscription
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="generate_subscription">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etl-loading-the-data-into-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      ETL: Loading the Data into the Database
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.etl" class="md-nav__link">
+    <span class="md-ellipsis">
+      etl
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.etl.load_csv_to_table" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_csv_to_table
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="load_csv_to_table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#utility-functions-for-db-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility Functions for DB operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.db_utils" class="md-nav__link">
+    <span class="md-ellipsis">
+      db_utils
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="db_utils">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#applications.etl.db_utils--modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modules:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications.etl.db_utils--environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications.etl.db_utils--dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.db_utils.delete_row" class="md-nav__link">
+    <span class="md-ellipsis">
+      delete_row
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.db_utils.export_to_dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_to_dataframe
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications.etl.db_utils.insert_row" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert_row
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🌐 API Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📱 Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔍 DS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>💡 ETL Process</h1>
+
+<h2 id="etl">ETL</h2>
+<h3 id="database-connection">Database Connection</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.etl.database"></a>
+    <div class="doc doc-contents first">
+
+        <p>Database Configuration Script</p>
+<p>This script sets up the database connection and configuration using SQLAlchemy.
+It includes functions and utilities for managing database sessions and models.</p>
+
+
+<p><span class="doc-section-title">Modules:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.database.- sqlalchemy">- sqlalchemy</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Core library for database connection and ORM.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.database.- dotenv">- dotenv</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For loading environment variables from a .env file.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.database.- os">- os</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For accessing environment variables and system operations.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="key-components" open>
+  <summary>Key Components</summary>
+  <ul>
+<li><code>get_db</code>: Provides a scoped database session.</li>
+<li><code>Base</code>: Declarative base class for database models.</li>
+<li><code>engine</code>: Database engine for connecting to the specified database.</li>
+<li><code>SessionLocal</code>: Session factory for creating session instances.</li>
+</ul>
+</details>
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.database.get_db" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_db</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Provides a database session for use within a scoped context.</p>
+<p>This function is designed to be used with dependency injection or 
+as a context manager to ensure that database resources are properly 
+managed and closed after use.</p>
+<p><strong>Yields:</strong>
+    db (Session): An instance of a database session that can be used 
+    for querying or modifying the database.</p>
+<p><strong>Raises:</strong>
+    None: The function manages the session and ensures it is closed 
+    after use.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/database.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_db</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides a database session for use within a scoped context.</span>
+
+<span class="sd">    This function is designed to be used with dependency injection or </span>
+<span class="sd">    as a context manager to ensure that database resources are properly </span>
+<span class="sd">    managed and closed after use.</span>
+
+<span class="sd">    **Yields:**</span>
+<span class="sd">        db (Session): An instance of a database session that can be used </span>
+<span class="sd">        for querying or modifying the database.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        None: The function manages the session and ensures it is closed </span>
+<span class="sd">        after use.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">SessionLocal</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">db</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="models-and-data-generation">Models and Data Generation</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.etl.models"></a>
+    <div class="doc doc-contents first">
+
+        <p>Database Models for the Analytics Platform.</p>
+<p>This module defines database models using SQLAlchemy for subscriptions, movies, customers, 
+segments, engagements, A/B tests, experiments, and their results.</p>
+
+
+<p><span class="doc-section-title">Modules:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- sqlalchemy">- sqlalchemy</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For ORM and database schema definition.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- datetime">- datetime</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For handling timestamp fields.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- loguru">- loguru</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For logging events.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- database">- database</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Includes the Base and engine configuration for SQLAlchemy.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Classes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `Subscription`">- `Subscription`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents different subscription plans.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `Movie`">- `Movie`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents movies with details like release year, genre and rating.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `Customer`">- `Customer`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents customer data, including subscription plans.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `Segment`">- `Segment`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents customer segments for analytics.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `CustomerSegment`">- `CustomerSegment`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents the customers and the segments they are sorted into.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `Engagement`">- `Engagement`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents customer engagement with movies.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `ABTest`">- `ABTest`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents descriptions of our A/B tests.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `Experiment`">- `Experiment`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents experiments related to A/B tests.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.models.- `ABTest_Result`">- `ABTest_Result`</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Represents results and metrics of A/B tests.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.ABTest" class="doc doc-heading">
+            <code>ABTest</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents metadata for an A/B test.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>ab_test_id (int)</code>: Unique identifier for the A/B test.</li>
+<li><code>goal (str)</code>: Goal of the test.</li>
+<li><code>targeting (str)</code>: Targeting criteria for the test.</li>
+<li><code>test_variant (int)</code>: Variant number of the test.</li>
+<li><code>text_skeleton (str)</code>: A text skeleton for conducting the test.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ABTest</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents metadata for an A/B test.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `ab_test_id (int)`: Unique identifier for the A/B test.</span>
+<span class="sd">    - `goal (str)`: Goal of the test.</span>
+<span class="sd">    - `targeting (str)`: Targeting criteria for the test.</span>
+<span class="sd">    - `test_variant (int)`: Variant number of the test.</span>
+<span class="sd">    - `text_skeleton (str)`: A text skeleton for conducting the test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;ab_tests&quot;</span>
+
+    <span class="n">ab_test_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">goal</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">targeting</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">test_variant</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">text_skeleton</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Text</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.ABTest_Result" class="doc doc-heading">
+            <code>ABTest_Result</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents results from A/B tests.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>result_id (int)</code>: Unique identifier for the result.</li>
+<li><code>ab_test_id (int)</code>: ID of the associated A/B test.</li>
+<li><code>customer_id (int)</code>: ID of the associated customer.</li>
+<li><code>experiment_id (int)</code>: ID of the associated experiment.</li>
+<li><code>clicked_link (bool)</code>: Whether the customer clicked the link.</li>
+<li><code>customer (Customer)</code>: Relationship to the Customer model.</li>
+<li><code>abtest (ABTest)</code>: Relationship to the ABTest model.</li>
+<li><code>experiment (Experiment)</code>: Relationship to the Experiment model.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ABTest_Result</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents results from A/B tests.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `result_id (int)`: Unique identifier for the result.</span>
+<span class="sd">    - `ab_test_id (int)`: ID of the associated A/B test.</span>
+<span class="sd">    - `customer_id (int)`: ID of the associated customer.</span>
+<span class="sd">    - `experiment_id (int)`: ID of the associated experiment.</span>
+<span class="sd">    - `clicked_link (bool)`: Whether the customer clicked the link.</span>
+<span class="sd">    - `customer (Customer)`: Relationship to the Customer model.</span>
+<span class="sd">    - `abtest (ABTest)`: Relationship to the ABTest model.</span>
+<span class="sd">    - `experiment (Experiment)`: Relationship to the Experiment model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;ab_test_results&quot;</span>
+
+    <span class="n">result_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">ab_test_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;ab_tests.ab_test_id&quot;</span><span class="p">))</span>
+    <span class="n">customer_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;customers.customer_id&quot;</span><span class="p">))</span>
+    <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;experiments.experiment_id&quot;</span><span class="p">))</span>
+    <span class="n">clicked_link</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+
+    <span class="n">customer</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Customer&quot;</span><span class="p">)</span>
+    <span class="n">abtest</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;ABTest&quot;</span><span class="p">)</span>
+    <span class="n">experiment</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Experiment&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.Customer" class="doc doc-heading">
+            <code>Customer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents a customer using the platform.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>customer_id (int)</code>: Unique identifier for the customer.</li>
+<li><code>name (str)</code>: Name of the customer.</li>
+<li><code>email (str)</code>: Email address of the customer.</li>
+<li><code>subscription_id (int)</code>: ID of the customer's subscription plan.</li>
+<li><code>location (str)</code>: Location (city) of the customer.</li>
+<li><code>created_at (datetime)</code>: Account creation timestamp.</li>
+<li><code>updated_at (datetime)</code>: Last update timestamp.</li>
+<li><code>subscription (Subscription)</code>: Relationship to the Subscription model.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a customer using the platform.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `customer_id (int)`: Unique identifier for the customer.</span>
+<span class="sd">    - `name (str)`: Name of the customer.</span>
+<span class="sd">    - `email (str)`: Email address of the customer.</span>
+<span class="sd">    - `subscription_id (int)`: ID of the customer&#39;s subscription plan.</span>
+<span class="sd">    - `location (str)`: Location (city) of the customer.</span>
+<span class="sd">    - `created_at (datetime)`: Account creation timestamp.</span>
+<span class="sd">    - `updated_at (datetime)`: Last update timestamp.</span>
+<span class="sd">    - `subscription (Subscription)`: Relationship to the Subscription model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;customers&quot;</span>
+
+    <span class="n">customer_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">subscription_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;subscriptions.subscription_id&quot;</span><span class="p">))</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>  
+    <span class="n">updated_at</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">onupdate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+
+    <span class="n">subscription</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Subscription&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.CustomerSegment" class="doc doc-heading">
+            <code>CustomerSegment</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents the mapping between customers and segments.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>customer_segment_id (int)</code>: Unique identifier for the mapping.</li>
+<li><code>customer_id (int)</code>: ID of the associated customer.</li>
+<li><code>segment_id (int)</code>: ID of the associated segment.</li>
+<li><code>customer (Customer)</code>: Relationship to the Customer model.</li>
+<li><code>segment (Segment)</code>: Relationship to the Segment model.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">CustomerSegment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents the mapping between customers and segments.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `customer_segment_id (int)`: Unique identifier for the mapping.</span>
+<span class="sd">    - `customer_id (int)`: ID of the associated customer.</span>
+<span class="sd">    - `segment_id (int)`: ID of the associated segment.</span>
+<span class="sd">    - `customer (Customer)`: Relationship to the Customer model.</span>
+<span class="sd">    - `segment (Segment)`: Relationship to the Segment model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;customer_segments&quot;</span>
+
+    <span class="n">customer_segment_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">customer_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;customers.customer_id&quot;</span><span class="p">))</span>
+    <span class="n">segment_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;segments.segment_id&quot;</span><span class="p">))</span>
+
+    <span class="n">customer</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Customer&quot;</span><span class="p">)</span>
+    <span class="n">segment</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Segment&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.Engagement" class="doc doc-heading">
+            <code>Engagement</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents customer engagement with movies.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>engagement_id (int)</code>: Unique identifier for the engagement.</li>
+<li><code>customer_id (int)</code>: ID of the associated customer.</li>
+<li><code>movie_id (int)</code>: ID of the associated movie.</li>
+<li><code>session_date (datetime)</code>: Timestamp of the engagement session.</li>
+<li><code>session_duration (int)</code>: Duration of the session in minutes.</li>
+<li><code>watched_fully (bool)</code>: Whether the movie was watched completely.</li>
+<li><code>like_status (str)</code>: Like/dislike status of the movie.</li>
+<li><code>customer (Customer)</code>: Relationship to the Customer model.</li>
+<li><code>movie (Movie)</code>: Relationship to the Movie model.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Engagement</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents customer engagement with movies.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `engagement_id (int)`: Unique identifier for the engagement.</span>
+<span class="sd">    - `customer_id (int)`: ID of the associated customer.</span>
+<span class="sd">    - `movie_id (int)`: ID of the associated movie.</span>
+<span class="sd">    - `session_date (datetime)`: Timestamp of the engagement session.</span>
+<span class="sd">    - `session_duration (int)`: Duration of the session in minutes.</span>
+<span class="sd">    - `watched_fully (bool)`: Whether the movie was watched completely.</span>
+<span class="sd">    - `like_status (str)`: Like/dislike status of the movie.</span>
+<span class="sd">    - `customer (Customer)`: Relationship to the Customer model.</span>
+<span class="sd">    - `movie (Movie)`: Relationship to the Movie model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;engagements&quot;</span>
+
+    <span class="n">engagement_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">customer_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;customers.customer_id&quot;</span><span class="p">))</span>
+    <span class="n">movie_id</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;movies.movie_id&quot;</span><span class="p">))</span>
+    <span class="n">session_date</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">session_duration</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">watched_fully</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">like_status</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+
+    <span class="n">customer</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Customer&quot;</span><span class="p">)</span>
+    <span class="n">movie</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Movie&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.Experiment" class="doc doc-heading">
+            <code>Experiment</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents an experiment tied to A/B tests.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>experiment_id (int)</code>: Unique identifier for the experiment.</li>
+<li><code>p_value (float)</code>: Statistical p-value for the experiment.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Experiment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an experiment tied to A/B tests.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `experiment_id (int)`: Unique identifier for the experiment.</span>
+<span class="sd">    - `p_value (float)`: Statistical p-value for the experiment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;experiments&quot;</span>
+
+    <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Float</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.Movie" class="doc doc-heading">
+            <code>Movie</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents a movie available on the platform.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>movie_id (int)</code>: Unique identifier for the movie.</li>
+<li><code>movie_name (str)</code>: Name of the movie.</li>
+<li><code>release_year (int)</code>: Release year of the movie.</li>
+<li><code>movie_duration (int)</code>: Duration of the movie in minutes.</li>
+<li><code>movie_rating (float)</code>: Average rating of the movie.</li>
+<li><code>movie_genre (str)</code>: Genre of the movie.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a movie available on the platform.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `movie_id (int)`: Unique identifier for the movie.</span>
+<span class="sd">    - `movie_name (str)`: Name of the movie.</span>
+<span class="sd">    - `release_year (int)`: Release year of the movie.</span>
+<span class="sd">    - `movie_duration (int)`: Duration of the movie in minutes.</span>
+<span class="sd">    - `movie_rating (float)`: Average rating of the movie.</span>
+<span class="sd">    - `movie_genre (str)`: Genre of the movie.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;movies&quot;</span>
+
+    <span class="n">movie_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">movie_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">release_year</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">movie_duration</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">movie_rating</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">movie_genre</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.Segment" class="doc doc-heading">
+            <code>Segment</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents a customer segment for analysis or targeting.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>segment_id (int)</code>: Unique identifier for the segment.</li>
+<li><code>segment_name (str)</code>: Name of the segment.</li>
+<li><code>segment_description (str)</code>: Description of the segment.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Segment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a customer segment for analysis or targeting.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `segment_id (int)`: Unique identifier for the segment.</span>
+<span class="sd">    - `segment_name (str)`: Name of the segment.</span>
+<span class="sd">    - `segment_description (str)`: Description of the segment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;segments&quot;</span>
+
+    <span class="n">segment_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">segment_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">segment_description</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Text</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="applications.etl.models.Subscription" class="doc doc-heading">
+            <code>Subscription</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="applications.etl.models.Base">Base</span></code></p>
+
+
+        <p>Represents subscription plans for the platform.</p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>subscription_id (int)</code>: Unique identifier for the subscription.</li>
+<li><code>subscription_name (str)</code>: Name of the subscription plan.</li>
+<li><code>price (int)</code>: Price of the subscription plan.</li>
+</ul>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>applications/etl/models.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Subscription</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents subscription plans for the platform.</span>
+
+<span class="sd">    **Attributes:**</span>
+
+<span class="sd">    - `subscription_id (int)`: Unique identifier for the subscription.</span>
+<span class="sd">    - `subscription_name (str)`: Name of the subscription plan.</span>
+<span class="sd">    - `price (int)`: Price of the subscription plan.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;subscriptions&quot;</span>
+
+    <span class="n">subscription_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subscription_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.etl.data_generator"></a>
+    <div class="doc doc-contents first">
+
+        <p>Data Generation Script</p>
+<p>This script uses the Faker library and predefined datasets to generate mock data for movies, customers, subscriptions, segments, engagements, and A/B tests (the rest of the tables are filled after running the models).
+Each data generator ensures consistency with predefined values or creates random but realistic mock data for testing and development.</p>
+
+
+<p><span class="doc-section-title">Modules:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.data_generator.- Faker">- Faker</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Generates somewhat realistic random data for names, emails, dates, etc.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.data_generator.- pandas">- pandas</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Data manipulation library (not yet used in this script but imported just because).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.data_generator.- random">- random</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Used for generating random values like session durations or probabilities.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.data_generator.- logging">- logging</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Standard Python logging library (not used yet in the script, same reason as pandas).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.data_generator.- loguru">- loguru</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Logging library for better formatting (imported but unused in this script, you get it).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.data_generator.generate_ab_test" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_ab_test</span><span class="p">(</span><span class="n">ab_test_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve a predefined A/B test configuration based on its ID.</p>
+<p><strong>Args:</strong>
+    ab_test_id (int): The ID of the A/B test to retrieve.</p>
+<p><strong>Returns:</strong>
+    dict: A dictionary containing A/B test details.</p>
+<p><strong>Raises:</strong>
+    ValueError: If the ab_test_id is invalid.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/data_generator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_ab_test</span><span class="p">(</span><span class="n">ab_test_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve a predefined A/B test configuration based on its ID.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        ab_test_id (int): The ID of the A/B test to retrieve.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        dict: A dictionary containing A/B test details.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        ValueError: If the ab_test_id is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">predefined_types</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;ab_test_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;subscription&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;targeting&quot;</span><span class="p">:</span> <span class="s2">&quot;subscription_plan&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;test_variant&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;text_skeleton&quot;</span><span class="p">:</span> <span class="s2">&quot;Simple. Affordable. Amazing. The (insert your subscription plan here) plan is yours today for just (insert your price here). What are you waiting for?&quot;</span> 
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;ab_test_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;subscription&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;targeting&quot;</span><span class="p">:</span> <span class="s2">&quot;subscription_plan&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;test_variant&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;text_skeleton&quot;</span><span class="p">:</span> <span class="s2">&quot;You deserve the best, and the (insert your subscription plan here) plan gives you just that—for only (insert your price here). Start your premium experience today!&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;ab_test_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;engagement&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;targeting&quot;</span><span class="p">:</span> <span class="s2">&quot;by movie&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;test_variant&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;text_skeleton&quot;</span><span class="p">:</span> <span class="s2">&quot;Looking for your next favorite movie? (insert the movie here) is a must-watch. Start streaming today!&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;ab_test_id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;engagement&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;targeting&quot;</span><span class="p">:</span> <span class="s2">&quot;by movie&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;test_variant&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;text_skeleton&quot;</span><span class="p">:</span> <span class="s2">&quot;Make tonight special with (insert the movie here). The perfect pick for your next binge session!&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;ab_test_id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;engagement&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;targeting&quot;</span><span class="p">:</span> <span class="s2">&quot;by genre&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;test_variant&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;text_skeleton&quot;</span><span class="p">:</span> <span class="s2">&quot;Can&#39;t get enough of (insert your genre)? We&#39;ve got you covered! Start streaming the best titles now.&quot;</span>
+        <span class="p">},{</span>
+            <span class="s2">&quot;ab_test_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="s2">&quot;engagement&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;targeting&quot;</span><span class="p">:</span> <span class="s2">&quot;by genre&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;test_variant&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;text_skeleton&quot;</span><span class="p">:</span> <span class="s2">&quot;Join millions of fans enjoying the best of (insert your genre). Don&#39;t wait—start streaming now!&quot;</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">ab_test_id</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predefined_types</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">predefined_types</span><span class="p">[</span><span class="n">ab_test_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid segment_id: no predefined segment exists with this ID.&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.data_generator.generate_customer" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_customer</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a mock customer record.</p>
+<p><strong>Args:</strong>
+    subscription_id (int): The subscription ID associated with the customer.</p>
+<p><strong>Returns:</strong>
+    dict: A dictionary containing customer details.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/data_generator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_customer</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a mock customer record.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        subscription_id (int): The subscription ID associated with the customer.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        dict: A dictionary containing customer details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">fake</span><span class="o">.</span><span class="n">date_time_this_decade</span><span class="p">()</span>
+    <span class="n">updated_at</span> <span class="o">=</span> <span class="n">fake</span><span class="o">.</span><span class="n">date_time_between</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">created_at</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;now&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">fake</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">fake</span><span class="o">.</span><span class="n">email</span><span class="p">(),</span>
+        <span class="s2">&quot;subscription_id&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+        <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">fake</span><span class="o">.</span><span class="n">city</span><span class="p">(),</span>
+        <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="n">created_at</span><span class="p">,</span>
+        <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="n">updated_at</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.data_generator.generate_engagement" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_engagement</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">movie_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate a mock engagement record between a customer and a movie.</p>
+<p><strong>Args:</strong>
+    customer_id (int): The customer involved in the engagement.
+    movie_id (int): The movie involved in the engagement.</p>
+<p><strong>Returns:</strong>
+    dict: A dictionary containing engagement details.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/data_generator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_engagement</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">movie_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a mock engagement record between a customer and a movie.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        customer_id (int): The customer involved in the engagement.</span>
+<span class="sd">        movie_id (int): The movie involved in the engagement.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        dict: A dictionary containing engagement details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;customer_id&quot;</span><span class="p">:</span> <span class="n">customer_id</span><span class="p">,</span>
+        <span class="s2">&quot;movie_id&quot;</span><span class="p">:</span> <span class="n">movie_id</span><span class="p">,</span>
+        <span class="s2">&quot;session_date&quot;</span><span class="p">:</span> <span class="n">fake</span><span class="o">.</span><span class="n">date_this_year</span><span class="p">(),</span>
+        <span class="s2">&quot;session_duration&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">360</span><span class="p">),</span>
+        <span class="s2">&quot;watched_fully&quot;</span><span class="p">:</span> <span class="n">fake</span><span class="o">.</span><span class="n">boolean</span><span class="p">(</span><span class="n">chance_of_getting_true</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
+        <span class="s2">&quot;like_status&quot;</span><span class="p">:</span> <span class="n">fake</span><span class="o">.</span><span class="n">random_element</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Liked&quot;</span><span class="p">,</span> <span class="s2">&quot;Disliked&quot;</span><span class="p">,</span> <span class="s2">&quot;No Action&quot;</span><span class="p">]),</span>
+    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.data_generator.generate_movie" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_movie</span><span class="p">(</span><span class="n">movie_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve a predefined movie from the list based on its ID.</p>
+<p><strong>Args:</strong>
+    movie_id (int): The ID of the movie to retrieve.</p>
+<p><strong>Returns:</strong>
+    dict: A dictionary containing movie details.</p>
+<p><strong>Raises:</strong>
+    ValueError: If the movie_id is invalid.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/data_generator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_movie</span><span class="p">(</span><span class="n">movie_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve a predefined movie from the list based on its ID.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        movie_id (int): The ID of the movie to retrieve.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        dict: A dictionary containing movie details.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        ValueError: If the movie_id is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">movie_id</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">real_films</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">real_films</span><span class="p">[</span><span class="n">movie_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid movie_id: no predefined product exists with this ID.&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.data_generator.generate_segment" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_segment</span><span class="p">(</span><span class="n">segment_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve a predefined customer segment based on its ID.</p>
+<p><strong>Args:</strong>
+    segment_id (int): The ID of the segment to retrieve.</p>
+<p><strong>Returns:</strong>
+    dict: A dictionary containing segment details.</p>
+<p><strong>Raises:</strong>
+    ValueError: If the segment_id is invalid.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/data_generator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_segment</span><span class="p">(</span><span class="n">segment_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve a predefined customer segment based on its ID.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        segment_id (int): The ID of the segment to retrieve.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        dict: A dictionary containing segment details.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        ValueError: If the segment_id is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">predefined_segments</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;segment_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lost Cause&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;segment_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Customers with minimal engagement and low value.&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;segment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Vulnerable Customers&quot;</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_description&quot;</span><span class="p">:</span> <span class="s2">&quot;At-risk customers who can be retained.&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;segment_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Free Riders&quot;</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Customers who use free services with low revenue contribution.&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;segment_id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Star Customers&quot;</span><span class="p">,</span> 
+         <span class="s2">&quot;segment_description&quot;</span><span class="p">:</span> <span class="s2">&quot;High-value customers who are highly engaged and loyal.&quot;</span><span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">segment_id</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predefined_segments</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">predefined_segments</span><span class="p">[</span><span class="n">segment_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid subscription_id: no predefined subscription exists with this ID.&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.data_generator.generate_subscription" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">generate_subscription</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve a predefined subscription plan based on its ID.</p>
+<p><strong>Args:</strong>
+    subscription_id (int): The ID of the subscription to retrieve.</p>
+<p><strong>Returns:</strong>
+    dict: A dictionary containing subscription details.</p>
+<p><strong>Raises:</strong>
+    ValueError: If the subscription_id is invalid.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/data_generator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_subscription</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve a predefined subscription plan based on its ID.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        subscription_id (int): The ID of the subscription to retrieve.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        dict: A dictionary containing subscription details.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        ValueError: If the subscription_id is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">predefined_subscriptions</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;subscription_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;subscription_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;subscription_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;subscription_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Family&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;subscription_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;subscription_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Basic&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;subscription_id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;subscription_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Premium&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">subscription_id</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predefined_subscriptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">predefined_subscriptions</span><span class="p">[</span><span class="n">subscription_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid subscription_id: no predefined subscription exists with this ID.&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="etl-loading-the-data-into-the-database">ETL: Loading the Data into the Database</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.etl.etl"></a>
+    <div class="doc doc-contents first">
+
+        <p>ETL Script for Generating and Loading Data into our Streaming Platform Database.</p>
+<p>This script generates data for subscriptions, customers, movies, engagements, A/B tests, segments, and related entities.
+It saves the generated data into CSV files and loads the CSV data into the respective database tables. The data can be viewed manually using PGAdmin.</p>
+
+
+<p><span class="doc-section-title">Modules:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- models">- models</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Database models for the project.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- database">- database</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Database engine and base class.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- data_generator">- data_generator</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Functions to generate mock (and real) data for the various entities.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- pandas">- pandas</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For data manipulation and storage in CSV format.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- loguru">- loguru</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For structured logging.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- random">- random</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For random number generation.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- sqlalchemy.orm">- sqlalchemy.orm</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For managing database sessions.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- glob, os">- glob, os</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For file and system operations.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="applications.etl.etl.- time">- time</span></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>For delays in the script execution.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.etl.load_csv_to_table" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">load_csv_to_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Load data from a CSV file into a database table.</p>
+<p><strong>Parameters:</strong></p>
+<pre><code>- `table_name (str)`: The name of the database table.
+- `csv_path (str)`: The path to the CSV file containing data.
+</code></pre>
+<p><strong>Returns:</strong>
+    - <code>None</code></p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/etl.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load_csv_to_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load data from a CSV file into a database table.</span>
+
+<span class="sd">    **Parameters:**</span>
+
+<span class="sd">        - `table_name (str)`: The name of the database table.</span>
+<span class="sd">        - `csv_path (str)`: The path to the CSV file containing data.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        - `None`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Loading table: </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1"> from </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="utility-functions-for-db-operations">Utility Functions for DB operations</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="applications.etl.db_utils"></a>
+    <div class="doc doc-contents first">
+
+        <p>Database Utilities Module</p>
+<p>This module provides utility functions to interact with a database using SQLAlchemy. (although, this author is not very sure they're being used)
+It includes functionality for inserting rows, deleting rows, and exporting data to a Pandas DataFrame.</p>
+<h3 id="applications.etl.db_utils--modules">Modules:</h3>
+<ul>
+<li>sqlalchemy: ORM for Python for database operations.</li>
+<li>pandas: For exporting and manipulating database data as DataFrames.</li>
+<li>psycopg2: PostgreSQL database adapter for Python (used internally by SQLAlchemy).</li>
+<li>dotenv: For loading environment variables from a .env file.</li>
+<li>time: For handling delays during retries.</li>
+<li>os: For accessing environment variables.</li>
+</ul>
+<h3 id="applications.etl.db_utils--environment-variables">Environment Variables:</h3>
+<ul>
+<li>DATABASE_URL: A connection string to the database (loaded from the .env file).</li>
+</ul>
+<h3 id="applications.etl.db_utils--dependencies">Dependencies:</h3>
+<ul>
+<li>AN .env file with the <code>DATABASE_URL</code> variable configured.</li>
+</ul>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.db_utils.delete_row" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">delete_row</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">conditions</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Delete rows from a table based on specified conditions.</p>
+<p>Enables efficient row deletion using SQLAlchemy, with conditions passed as a dictionary of column-value pairs.</p>
+<p><strong>Args:</strong>
+    table (sqlalchemy.Table): SQLAlchemy table object from which rows will be deleted.
+    conditions (dict): Dictionary of column-value pairs to filter rows for deletion.</p>
+<p><strong>Raises:</strong>
+    SQLAlchemyError: If an error occurs during the deletion process.</p>
+<p><strong>Example:</strong>
+    delete_row(table=CustomerTable, conditions={"id": 1, "name": "John Doe"})</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/db_utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">delete_row</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">conditions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete rows from a table based on specified conditions.</span>
+
+<span class="sd">    Enables efficient row deletion using SQLAlchemy, with conditions passed as a dictionary of column-value pairs.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        table (sqlalchemy.Table): SQLAlchemy table object from which rows will be deleted.</span>
+<span class="sd">        conditions (dict): Dictionary of column-value pairs to filter rows for deletion.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        SQLAlchemyError: If an error occurs during the deletion process.</span>
+
+<span class="sd">    **Example:**</span>
+<span class="sd">        delete_row(table=CustomerTable, conditions={&quot;id&quot;: 1, &quot;name&quot;: &quot;John Doe&quot;})</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">[</span><span class="n">table</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">conditions</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Row(s) deleted successfully.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">SQLAlchemyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error deleting row(s): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.db_utils.export_to_dataframe" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">export_to_dataframe</span><span class="p">(</span><span class="n">table</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Export all data from a database table into a Pandas DataFrame.</p>
+<p>Useful for integrating database data with Python's data analysis ecosystem. The function handles the conversion of SQLAlchemy query results to a Pandas DataFrame seamlessly.</p>
+<p><strong>Args:</strong>
+    table (sqlalchemy.Table): SQLAlchemy table object to export data from.</p>
+<p><strong>Returns:</strong>
+    pd.DataFrame: A Pandas DataFrame containing the table's data.</p>
+<p><strong>Raises:</strong>
+    SQLAlchemyError: If an error occurs during data export.</p>
+<p><strong>Example:</strong>
+    df = export_to_dataframe(table=CustomerTable)</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/db_utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">export_to_dataframe</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Export all data from a database table into a Pandas DataFrame.</span>
+
+<span class="sd">    Useful for integrating database data with Python&#39;s data analysis ecosystem. The function handles the conversion of SQLAlchemy query results to a Pandas DataFrame seamlessly.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        table (sqlalchemy.Table): SQLAlchemy table object to export data from.</span>
+
+<span class="sd">    **Returns:**</span>
+<span class="sd">        pd.DataFrame: A Pandas DataFrame containing the table&#39;s data.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        SQLAlchemyError: If an error occurs during data export.</span>
+
+<span class="sd">    **Example:**</span>
+<span class="sd">        df = export_to_dataframe(table=CustomerTable)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">statement</span><span class="p">,</span> <span class="n">session</span><span class="o">.</span><span class="n">bind</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="k">except</span> <span class="n">SQLAlchemyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error exporting to DataFrame: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="applications.etl.db_utils.insert_row" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">insert_row</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Attempt to insert a new row into a database table.</p>
+<p>Handles unique constraint violations gracefully by retrying the operation
+for a specified number of attempts. This function is ideal for scenarios
+involving race conditions in database writes.</p>
+<p><strong>Args:</strong>
+    table (sqlalchemy.Table): SQLAlchemy table object where the row will be inserted.
+    data (dict): Dictionary mapping column names to values for the new row.
+    retries (int, optional): Number of retry attempts in case of a conflict. Defaults to 5.
+    delay (int, optional): Delay in seconds between retry attempts. Defaults to 1.</p>
+<p><strong>Raises:</strong>
+    SQLAlchemyError: If an error other than a unique constraint violation occurs.</p>
+<p><strong>Example:</strong>
+    insert_row(table=CustomerTable, data={"id": 1, "name": "John Doe"})</p>
+
+            <details class="quote">
+              <summary>Source code in <code>applications/etl/db_utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">insert_row</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempt to insert a new row into a database table.</span>
+
+<span class="sd">    Handles unique constraint violations gracefully by retrying the operation</span>
+<span class="sd">    for a specified number of attempts. This function is ideal for scenarios</span>
+<span class="sd">    involving race conditions in database writes.</span>
+
+<span class="sd">    **Args:**</span>
+<span class="sd">        table (sqlalchemy.Table): SQLAlchemy table object where the row will be inserted.</span>
+<span class="sd">        data (dict): Dictionary mapping column names to values for the new row.</span>
+<span class="sd">        retries (int, optional): Number of retry attempts in case of a conflict. Defaults to 5.</span>
+<span class="sd">        delay (int, optional): Delay in seconds between retry attempts. Defaults to 1.</span>
+
+<span class="sd">    **Raises:**</span>
+<span class="sd">        SQLAlchemyError: If an error other than a unique constraint violation occurs.</span>
+
+<span class="sd">    **Example:**</span>
+<span class="sd">        insert_row(table=CustomerTable, data={&quot;id&quot;: 1, &quot;name&quot;: &quot;John Doe&quot;})</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Attempt to insert the row</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inserting data: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">))</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Row inserted successfully.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">SQLAlchemyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Handle unique constraint violation and retry if needed</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">orig</span><span class="p">,</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">UniqueViolation</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Primary key conflict: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Retrying...&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>  <span class="c1"># Wait before retrying</span>
+                <span class="k">return</span> <span class="n">insert_row</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">retries</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max retries reached. Could not insert row.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error inserting row: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "navigation.smooth", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
